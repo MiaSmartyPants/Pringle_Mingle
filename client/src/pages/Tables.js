@@ -1,36 +1,38 @@
 import React from "react";
-import '../App.css'
+import '../App.css';
+import { TableOfNames } from "../components/TableOfNames";
 export default function Tables({data}) {
     if(!data){
         return null;
     }
 
+    // const [allNames, setAllNames] = useState();
+
+    // async function getData() {
+    //   // await fetch("http://localhost:5050/")
+      
+    //   .then((response) => response)
+    //   .then((data) => {
+    //     return data.json();
+    //   })
+    //   .then((data)=> {
+    //     console.log("data", data)
+    //     setAllNames(data)
+
+    //   })
+    //  } 
+       
+    //    useEffect(() => {
+    //   // CALL here
+    //    getData() 
+    //    },[])
+  
     console.log(data);
   return (
     <div >
        <h1>{data.Header}</h1>
-
-      <table class="styled-table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Address</th>
-          <th>Options</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {data.mockData.map((item, index) => (
-          <tr key={item.key}>
-            <td>{item.name}</td>
-            <td>{item.age}</td>
-            <td>{item.address}</td>
-            <td />
-          </tr>
-        ))}
-      </tbody>
-    </table> 
+<TableOfNames data={data}/>
+      
   
     </div>
   );

@@ -17,12 +17,12 @@ export const SidebarData = [
     icon: <IoIcons.IoIosPaper />,
     cName: "nav-text"
   },
-  {
-    title: "Create Groups",
-    path: "/creategroups",
-    icon: <FaIcons.FaCartPlus />,
-    cName: "nav-text"
-  },
+  // {
+  //   title: "Create Groups",
+  //   path: "/creategroups",
+  //   icon: <FaIcons.FaCartPlus />,
+  //   cName: "nav-text"
+  // },
   {
     title: "Groups",
     path: "/groups",
@@ -30,8 +30,8 @@ export const SidebarData = [
     cName: "nav-text"
   },
   {
-    title: "Messages",
-    path: "/",
+    title: "Customize Groups",
+    path: "/customize",
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: "nav-text"
   },

@@ -1,45 +1,51 @@
 {
     "Header": {
-      "title": "ALL THE BEST RECIPES ",
-      "paragraph": "From Your Favorite International Soul Chef."
+      "title": "The people sorter  ",
+      "paragraph": "stuff ABout my website here"
     },
-    "TAbout": {
-      "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      "Why": [
-        "🫔 Ut enim ad minim veniam ",
-        "🧇 Consectetur adipiscing elit ",
-        "🍣 Lorem ipsum dolor sit amet",
-        "🍳 Duis sed dapibus leo nec "
-      ],
-      "Why2": [
-        "😋 Consectetur adipiscing elit ",
-        "🥰 Ut enim ad minim veniam",
-        "🤌🏾 Lorem ipsum dolor sit amet",
-        "🤤 Ut enim ad minim veniam"
-      ]
-    },
+
+
+    "Groups": {
+      "Header": "Table Database",
+      "tableName":"H2 2022",
+      "groupName":"Group 1",
+      "mockData": [
+      {
+        "key": "1",
+        "firstName": "Kim",
+        "lastName": "Warren"
+      },
+      {
+        "key": "2",
+        "firstName": "John",
+        "lastName": "smith"
+        
+      }
+     ]
+     },
+
     
     "Tables": {
         "Header": "Table Database",
+        "tableName":"H2 2022",
         "mockData": [
         {
           "key": "1",
-          "name": "Mike",
-          "age": 32,
-          "address": "10 Downing Street"
+          "firstName": "Kim",
+          "lastName": "Warren"
         },
         {
           "key": "2",
-          "name": "John",
-          "age": 42,
-          "address": "10 Downing Street"
+          "firstName": "John",
+          "lastName": "smith"
+          
         }
     ]
     },
    
     "Features": [
       {
-        "icon": "fa fa-comments-o",
+        "icon": "kim",
         "title": "Lorem ipsum",
         "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
       },

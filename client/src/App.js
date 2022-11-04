@@ -9,6 +9,7 @@ import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
 import Groups from "./pages/Groups";
 import Tables from "./pages/Tables";
+import Customize from "./pages/Customize";
 
 export default function App() {
 
@@ -26,8 +27,9 @@ export default function App() {
         <Routes>
         <Route path='/' element={<LandingPage/>} />
         <Route path='/dashboard' element={<Dashboard/>} />
-        <Route path='/groups' element={<Groups/>} />
+        <Route path='/groups' element={<Groups data={landingPageData.Groups} />} />
         <Route path='/tables' element={<Tables data={landingPageData.Tables} />} />
+        <Route path='/customize' element={<Customize/>} />
         </Routes>
       </Router>
     </div>
