@@ -20,8 +20,6 @@ export const CustomizeForm = () => {
 <div className='form'>
    
         <form onSubmit={handleSubmit}>
-          
-
 
               <div>
                 <label>Names</label>
