@@ -24,9 +24,12 @@ app.get('/', (req, res) => {
 
 
 
-   app.get('/users', db.getUsers)
-   app.get('/users/:id', db.getUserById)
-
+   app.get('/admin', db.getAdmin)
+   app.get('/admin/:id', db.getAdminById)
+   app.get('/guests', db.getGuests)
+   app.get('/guests/:id', db.getGuestsById)
+   app.get('/events/:id', db.getEventsById)
+   app.get('/rooms/:id', db.getRoomsById)
 
 
 
