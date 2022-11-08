@@ -25,11 +25,11 @@ export default function App() {
       <Router>
         <Navbar />
         <Routes>
-        <Route path='/' element={<LandingPage/>} />
         <Route path='/dashboard' element={<Dashboard/>} />
         <Route path='/groups' element={<Groups data={landingPageData.Groups} />} />
         <Route path='/tables' element={<Tables data={landingPageData.Tables} />} />
         <Route path='/customize' element={<Customize/>} />
+        <Route path='/' element={<LandingPage/>} />
         </Routes>
       </Router>
     </div>

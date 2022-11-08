@@ -32,7 +32,35 @@ const getAdmin = (request, response) => {
   }
 
   //post admin if signed up
+  const postAdmin = (request, response) => {
+  
+    const { name, email} = request.body; 
+    console.log(request.body)
+  //insert into name email, ord_id and orgName into organization table
+    pool.query('INSERT INTO admin (name, email) VALUES ($1, $2) RETURNING *', [name, email], (error, results) => {
+      if (error) {
+        console.log(error)
+        return response.json(error.detail);
+      }
+      response.status(200).json(results.rows)
+    })
+  }
+//put request
+const updateAdmin = (request, response) => {
+  const email = (request.params.email)
+  const { org_id } = request.body
 
+  pool.query(
+    'UPDATE admin SET org_id = $1 WHERE email = $2',
+    [org_id, email],
+    (error, results) => {
+      if (error) {
+        throw error
+      }
+      response.status(200).send(`User modified with ID: ${email}`)
+    }
+  )
+}
 
   /**** Guest queries *****/
 
@@ -107,8 +135,41 @@ const getRoomsById = (request, response) => {
 //select all names that belongs to room $1
 
 /*** Organization Queries ****/
+//post org
+const postOrg = (request, response) => {
+  const { org_name} = request.body; 
+  console.log(request.body)
+  pool.query('INSERT INTO organizations (org_name) VALUES ($1) RETURNING *', [org_name], (error, results) => {
+    if (error) {
+      console.log(error)
+      return response.json(error.detail);
+    }
+    response.status(200).json(results.rows)
+  })
+}
 
-//select org where id =$1
+//select all orgs
+const getAllOrgs = (request, response) => {
+  pool.query('SELECT * FROM organizations ORDER BY id ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+//select org where name =$1
+const getOrgByName = (request, response) => {
+  const org_name = (request.params.orgname)
+  console.log(org_name)
+  pool.query("SELECT * FROM organizations WHERE org_name = $1 ", [org_name], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
 
   module.exports = {
   
@@ -117,5 +178,10 @@ const getRoomsById = (request, response) => {
     getGuests,
     getGuestsById,
     getEventsById,
-    getRoomsById
+    getRoomsById,
+    getAllOrgs,
+    getOrgByName,
+    postAdmin,
+    postOrg,
+    updateAdmin
   }

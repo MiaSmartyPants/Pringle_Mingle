@@ -16,21 +16,28 @@ import { SidebarData } from "./SlidebarData";
 // STYLES
 import "./Navbar.css";
 import LogoutButton from "./LogoutButton";
+import LoginButton from "./LoginButton";
+import { Profile } from "./Profile";
+import {useAuth0} from "@auth0/auth0-react";
 
 export default function Navbar() {
   const [sidebar, setSidebar] = useState(false);
-
   const showSidebar = () => setSidebar(!sidebar);
+  const {user,isAuthenticated}= useAuth0();
 
   return (
-    <>
+
+    !!isAuthenticated && (
       <IconContext.Provider value={{ color: "#FFF" }}>
         {/* All the icons now are white */}
+       
         <div className="navbar">
           <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
         </div>
+       
+          <div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={showSidebar}>
             <li className="navbar-toggle">
@@ -38,6 +45,7 @@ export default function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
+<Profile />
 
             {SidebarData.map((item, index) => {
               return (
@@ -53,9 +61,15 @@ export default function Navbar() {
               logoout
               <LogoutButton/>
             </li>
+
           </ul>
+
         </nav>
+        
+        </div>
+    
       </IconContext.Provider>
-    </>
-  );
+    
+    )
+);
 }
