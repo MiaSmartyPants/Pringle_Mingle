@@ -29,9 +29,10 @@ app.get('/', (req, res) => {
 
    app.get('/admin', db.getAdmin)
    app.get('/admin/:id', db.getAdminById)
+   app.get('/adminemail/:email', db.getAdminByEmail)
    app.get('/guests', db.getGuests)
    app.get('/guests/:id', db.getGuestsById)
-   app.get('/events/:id', db.getEventsById)
+   app.get('/events/:orgid', db.getEventsById)
    app.get('/rooms/:id', db.getRoomsById)
    app.get('/organizations', db.getAllOrgs)
    app.get('/organizations/:orgname', db.getOrgByName)

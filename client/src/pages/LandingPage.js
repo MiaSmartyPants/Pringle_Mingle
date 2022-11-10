@@ -6,6 +6,9 @@ import { Profile } from "../components/Profile";
 import {useAuth0} from "@auth0/auth0-react";
 import { useState,useEffect } from "react";
 
+import { Link } from 'react-router-dom';
+
+
  
 export default function LandingPage() {
   const {user,isAuthenticated}= useAuth0();
@@ -136,6 +139,7 @@ function getOrganizations(){
 
  useEffect(() => {
   // CALL here
+
   updateAdmin()
   
   
@@ -162,29 +166,28 @@ function getOrganizations(){
  });
   }
 
-
-
-  return (
-    <div >
-      <h1>Landing Page</h1>
-      {!isAuthenticated && (
+     return (
+       <div>
+            
+                {!isAuthenticated && (
         
-      <div className="loginLanding">
-      <LoginButton/>
-      </div>
-      )}
-       {!!isAuthenticated && ( 
-        <div>
-          Signin Successful
-          <br></br>
-          
-         <button onClick={addToAdmin}>Welcome in!</button>
-         
-         {/* <button onClick={getOrganizations}>Welcome in!</button> */}
-        </div>
-        )}
-     
-     
-   </div>
-  );
-}
+                  <div className="loginLanding">
+                  <LoginButton/>
+                  </div>
+                  )}
+                   {!!isAuthenticated && ( 
+                    <div>
+                      Signin Successful
+                      <br></br>
+                      
+                     <button onClick={addToAdmin}>Welcome in!</button>
+                     
+                     {/* <button onClick={getOrganizations}>Welcome in!</button> */}
+                    </div>
+                   )}
+                   </div>
+            )
+        }
+
+
+    

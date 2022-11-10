@@ -31,6 +31,17 @@ const getAdmin = (request, response) => {
     })
   }
 
+//get admin by email
+const getAdminByEmail = (request, response) => {
+  const email = (request.params.email)
+  console.log(email)
+  pool.query("SELECT * FROM admin WHERE email = $1 ", [email], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
   //post admin if signed up
   const postAdmin = (request, response) => {
   
@@ -175,6 +186,7 @@ const getOrgByName = (request, response) => {
   
     getAdmin,
     getAdminById,
+    getAdminByEmail,
     getGuests,
     getGuestsById,
     getEventsById,
