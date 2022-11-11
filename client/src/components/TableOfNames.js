@@ -1,37 +1,57 @@
+import { eventNames } from 'process'
 import React from 'react'
 
-export const TableOfNames = ({data}) => {
+export const TableOfNames = ({ data }) => {
+  // if(data.length == 0){
+  //   return null;
+  // }
+
+  console.log('events for tableofNames', data)
+
+
+
+
+
+  //  item.guest_ids.map((index) => {
+  // console.log(index)//fetch request for selct participant by id
+  // })//map through id for guests
+
+
 
 
   return (
-    <div>TableOfNames
+    <div>
+      {data.map((event) => (
 
-     {/* encase the whole thing in a map? */}
-     <h3>{data.tableName}</h3>
-     <table class="styled-table">
-     <thead>
-       <tr>
-        
-         <th>First Name</th>
-         <th>Last Name</th>
-         <th>Edit</th>
-         <th>Delete</th>
-         
-       </tr>
-     </thead>
 
-     <tbody>
-       {data.mockData.map((item, index) => (
-         <tr key={item.key}>
-        
-           <td>{item.firstName}</td>
-           <td>{item.lastName}</td>
-          
-           <td />
-         </tr>
-       ))}
-     </tbody>
-   </table> 
-   </div>
+        <div>
+          {event.eventNames}
+
+          <table class="styled-table">
+            <thead>
+              <tr>
+
+                <th>Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+
+              </tr>
+            </thead>
+
+            <tbody>
+              {event.guest_ids.map((guest) => (
+                <tr key={guest}>
+                  <td>{guest}</td>
+                  {/* <td>{item.lastName}</td>  this will be for the edit button */}
+
+                  <td />
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ))}
+    </div>
   )
 }
+

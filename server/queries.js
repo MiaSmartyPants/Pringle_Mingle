@@ -42,6 +42,7 @@ const getAdminByEmail = (request, response) => {
     response.status(200).json(results.rows)
   })
 }
+
   //post admin if signed up
   const postAdmin = (request, response) => {
   
@@ -57,7 +58,7 @@ const getAdminByEmail = (request, response) => {
     })
   }
 //put request
-const updateAdmin = (request, response) => {
+const updateAdminByEmail = (request, response) => {
   const email = (request.params.email)
   const { org_id } = request.body
 
@@ -72,6 +73,21 @@ const updateAdmin = (request, response) => {
     }
   )
 }
+// const updateAdminByEmail = (request, response) => {
+//   const email = (request.params.email)
+//   const { org_id } = request.body
+
+//   pool.query(
+//     'UPDATE admin SET org_id = $1 WHERE email = $2',
+//     [org_id, email],
+//     (error, results) => {
+//       if (error) {
+//         throw error
+//       }
+//       response.status(200).send(`User modified with ID: ${email}`)
+//     }
+//   )
+// }
 
   /**** Guest queries *****/
 
@@ -106,9 +122,10 @@ const updateAdmin = (request, response) => {
 
 //select all events that belong to company
 const getEventsById = (request, response) => {
-  const id = parseInt(request.params.id)
+  const orgid = parseInt(request.params.orgid)
+  console.log(orgid)
 
-  pool.query('SELECT * FROM events WHERE org_id = $1', [id], (error, results) => {
+  pool.query('SELECT * FROM events WHERE org_id = $1', [orgid], (error, results) => {
     if (error) {
       throw error
     }
@@ -195,5 +212,5 @@ const getOrgByName = (request, response) => {
     getOrgByName,
     postAdmin,
     postOrg,
-    updateAdmin
+    updateAdminByEmail
   }

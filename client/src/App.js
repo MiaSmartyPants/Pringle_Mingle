@@ -16,6 +16,7 @@ import Customize from "./pages/Customize";
 
 export default function App({data}) {
   const {user,isAuthenticated}= useAuth0();
+  const [org_id,setOrg_id]= useState();
  
   
   console.log(user)
@@ -32,7 +33,8 @@ export default function App({data}) {
     },[isAuthenticated]);
 
 function recieveAdminData(data){
-console.log("app.js", data)
+console.log("app.js", data[0].org_id)
+setOrg_id(data[0].org_id)
 }
 
 
@@ -43,9 +45,9 @@ console.log("app.js", data)
       <Router>
         <Navbar />
         <Routes>
-        <Route path='/dashboard' element={<Dashboard/>} />
-        <Route path='/groups' element={<Groups data={landingPageData.Groups} />} />
-        <Route path='/tables' element={<Tables data={landingPageData.Tables} />} />
+        <Route path='/dashboard' element={<Dashboard org_id={org_id}/>}  />
+        <Route path='/groups' element={<Groups data={landingPageData.Groups} org_id={org_id} />} />
+        <Route path='/tables' element={<Tables org_id={org_id} />} />
         <Route path='/customize' element={<Customize/>} />
         <Route path='/' element={<LandingPage/>} />
         </Routes>

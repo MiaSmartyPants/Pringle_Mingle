@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
   let email = user.email
   console.log('fetch', email)
 
-  fetch(`/adminemail/${email}`)
+  fetch(`http://localhost:5050/adminemail/${email}`)
 	  
   //return the response
   .then((response) => response)
