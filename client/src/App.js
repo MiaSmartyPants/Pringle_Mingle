@@ -11,7 +11,7 @@ import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
 import Groups from "./pages/Groups";
 import Tables from "./pages/Tables";
-import Customize from "./pages/Customize";
+
 
 
 export default function App({data}) {
@@ -46,9 +46,8 @@ setOrg_id(data[0].org_id)
         <Navbar />
         <Routes>
         <Route path='/dashboard' element={<Dashboard org_id={org_id}/>}  />
-        <Route path='/groups' element={<Groups data={landingPageData.Groups} org_id={org_id} />} />
+        <Route path='/groups' element={<Groups org_id={org_id} />} />
         <Route path='/tables' element={<Tables org_id={org_id} />} />
-        <Route path='/customize' element={<Customize/>} />
         <Route path='/' element={<LandingPage/>} />
         </Routes>
       </Router>

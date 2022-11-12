@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { FaSort } from "react-icons/fa";
 import '../App.css';
-
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import { CustomizeForm } from "../components/CustomizeForm";
 import { TableOfNames } from "../components/TableOfNames";
+import { EnterNames } from "../components/EnterNames";
 
 
 
@@ -42,8 +45,17 @@ export default function Tables({ org_id }) {
 
   return (
     <div >
+      <div>
       <h1>All Your Events</h1>
+      <Popup trigger={<button>Create Event Table</button>} position="right center">
+            <div>Customize Your Rooms</div>
+            <EnterNames />
+          </Popup>
+      
+      </div>
+      <br></br><br></br>
       <TableOfNames data={events} />
+     
 
       {/* <button onClick={createRooms}>create breakout rooms</button> */}
 

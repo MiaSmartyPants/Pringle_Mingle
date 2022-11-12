@@ -29,12 +29,12 @@ export const SidebarData = [
     icon: <IoIcons.IoMdPeople />,
     cName: "nav-text"
   },
-  {
-    title: "Customize Groups",
-    path: "/customize",
-    icon: <FaIcons.FaEnvelopeOpenText />,
-    cName: "nav-text"
-  },
+  // {
+  //   title: "Customize Groups",
+  //   path: "/customize",
+  //   icon: <FaIcons.FaEnvelopeOpenText />,
+  //   cName: "nav-text"
+  // },
   {
     title: "Logout",
     path: "/",

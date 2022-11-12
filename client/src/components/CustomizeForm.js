@@ -1,28 +1,24 @@
-import React, {useState} from 'react'
-import Papa from 'papaparse';
-import { render } from "react-dom";
+import React, { useState } from 'react'
 import "../App.css";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 
 
 
 export const CustomizeForm = () => {
 
-  const [file, setFile] = useState();
-function handleOnSubmit(){
-    const fileReader = new FileReader();
-}
-    const OnChange = (event) => {
-      Papa.parse(event.target.files[0], {
-        header: false,
-        skipEmptyLines: true,
-        complete: function (results) {
-          console.log(results.data)
-        },
-      });
-    };
+  const [sizeOFGroups, setSizeOfGroups] = useState('');
 
-  
+  const updateSizeOfGroups = (e) => {
+    setSizeOfGroups(e.target.value);
+  }
+
+  function handleOnSubmit(e) {
+    e.preventDefault();
+    console.log('size of groups', sizeOFGroups)
+
+  }
 
 
   return (
@@ -30,75 +26,26 @@ function handleOnSubmit(){
 
       <form onSubmit={handleOnSubmit}>
 
-        <div>
-          <label>Names</label>
-          <input
-            name="Paste List of Names"
-            type="text"
-            placeholder="Paste List of Names"
-          />
-        </div>
-        <div>
-          <label>Volunteers/Staff (optional)</label>
-          <input
-            name="Paste List of Names"
-            component="input"
-            type="text"
-            placeholder="Paste List of Names"
-          />
-        </div>
+
+       
+        <br></br>
         <div>
           <label>Size of Groups</label>
           <input
             component="input"
             type="number"
             placeholder="Total Population Size?"
+            onChange={updateSizeOfGroups}
+            required
           />
         </div>
-        <p style={{ color: "red" }}>OR</p>
-        <div>
-          <label>Number of Groups</label>
-          <input
-            component="input"
-            type="number"
-            placeholder="How Many Groups?"
-          />
+        <br></br>
+        <div className="buttons">
+          <button type="submit">
+            Submit
+          </button>
         </div>
-
-        <div>
-          <label>Event Name</label>
-          <input
-            type="text"
-            placeholder="What should this table be called?"
-          />
-        </div>
-       
-       
-        <div>
-          <label>Upload Names</label>
-          <div style={{ textAlign: "center" }}>
-            <h1>REACTJS CSV IMPORT EXAMPLE </h1>
-            
-                <input type={"file"} accept={".csv"} onChange={OnChange}/>
-           
-        </div>
-          </div>
-          
-          
-          
-          <div className="buttons">
-            <button type="submit">
-              Submit
-            </button>
-            <button
-              type="button"
-            //   onClick={reset}
-
-            >
-              Reset
-            </button>
-          </div>
-
+        <br></br><br></br>
       </form>
 
     </div>
