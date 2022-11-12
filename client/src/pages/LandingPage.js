@@ -6,6 +6,8 @@ import { Profile } from "../components/Profile";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect } from "react";
 
+
+
 import { Link } from 'react-router-dom';
 
 
@@ -139,10 +141,10 @@ export default function LandingPage() {
 
   useEffect(() => {
     // CALL here
-  if(email){
-    updateAdmin()
-}
-  
+    if (email) {
+      updateAdmin()
+    }
+
 
 
   }, [org_id, email])
@@ -169,24 +171,45 @@ export default function LandingPage() {
   }
 
   return (
-    <div>
+    <div className="landing">
 
-      {!isAuthenticated && (
 
-        <div className="loginLanding">
-          <LoginButton />
-        </div>
-      )}
-      {!!isAuthenticated && (
+      
+      <section id="home">
+        <div className="container">
+          <div className="home-text">
+            <div className="section-text__subtitle">App landing page</div>
+            <div className="section-text__title-big">
+              No stress wth Pringle Mingle
+            </div>
+            <div className="section-text__body">
+              Dorem ipsum dolor sitamet, consectetur adipiscing elit, sed do eiusm
+              tempor incididunt ulabore et dolore magna aliqua.
+            </div>
+            {!isAuthenticated && (
+
+              <div className="download-btn">
+                <LoginButton />
+              </div>
+            )}
+            {!!isAuthenticated && (
         <div>
           Signin Successful
           <br></br>
 
-          <button onClick={addToAdmin}>Welcome in!</button>
+          <button className="download-btn" onClick={addToAdmin}>Welcome in!</button>
 
-          {/* <button onClick={getOrganizations}>Welcome in!</button> */}
         </div>
       )}
+          </div>
+
+          <div className="section-image">
+            <img src="./images/hero_right.webp" alt="app preview" />
+          </div>
+        </div>
+      </section>
+      );
+
     </div>
   )
 }
