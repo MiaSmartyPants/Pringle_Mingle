@@ -57,7 +57,7 @@ const getAdminByEmail = (request, response) => {
       response.status(200).json(results.rows)
     })
   }
-//put request
+//put request to uodate admin with org id
 const updateAdminByEmail = (request, response) => {
   const email = (request.params.email)
   const { org_id } = request.body
@@ -89,6 +89,9 @@ const updateAdminByEmail = (request, response) => {
 //   )
 // }
 
+
+
+
   /**** Guest queries *****/
 
   //select all guests
@@ -101,11 +104,11 @@ const updateAdminByEmail = (request, response) => {
     })
   }
 
-  //select all guests that belong to company
-  const getGuestsById = (request, response) => {
+  //select geuests by id
+  const getGuestById = (request, response) => {
     const id = parseInt(request.params.id)
   
-    pool.query('SELECT * FROM guests WHERE org_id = $1', [id], (error, results) => {
+    pool.query('SELECT * FROM guests WHERE id = $1', [id], (error, results) => {
       if (error) {
         throw error
       }
@@ -113,7 +116,7 @@ const updateAdminByEmail = (request, response) => {
     })
   }
 
-  // add guests with auto org assignment
+  // post guests with auto org assignment
  
  
  
@@ -121,20 +124,17 @@ const updateAdminByEmail = (request, response) => {
   /**** Events Queries *****/
 
 //select all events that belong to company
-const getEventsById = (request, response) => {
+const getEventsByOrgId = (request, response) => {
   const orgid = parseInt(request.params.orgid)
   console.log(orgid)
 
-  pool.query('SELECT * FROM events WHERE org_id = $1', [orgid], (error, results) => {
+  pool.query('SELECT e.id, e.event_name, e.org_id, g.id as guest_id, g.name as guest_name FROM events as e JOIN guests as g on g.id = any(e.guest_ids) WHERE e.org_id = $1;', [orgid], (error, results) => {
     if (error) {
       throw error
     }
     response.status(200).json(results.rows)
   })
 }
-
-//select all guests that belong to event
-
 //post guest to events
 
 // put guest to event
@@ -149,20 +149,22 @@ const getEventsById = (request, response) => {
 /**** Breakout Room Queries *****/
 
 //select all room that belong to event
-const getRoomsById = (request, response) => {
+const getRoomsByEventId = (request, response) => {
   const id = parseInt(request.params.id)
 
-  pool.query('SELECT * FROM rooms WHERE event_id = $1', [id], (error, results) => {
+  pool.query('SELECT r.id, r.room, r.event_id, g.name as guest_name FROM rooms as r JOIN guests as g on g.id = ANY(r.guest_ids) WHERE r.event_id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
     response.status(200).json(results.rows)
   })
 }
-
 //select all names that belongs to room $1
 
+
+
 /*** Organization Queries ****/
+
 //post org
 const postOrg = (request, response) => {
   const { org_name} = request.body; 
@@ -205,9 +207,9 @@ const getOrgByName = (request, response) => {
     getAdminById,
     getAdminByEmail,
     getGuests,
-    getGuestsById,
-    getEventsById,
-    getRoomsById,
+    getGuestById,
+    getEventsByOrgId,
+    getRoomsByEventId,
     getAllOrgs,
     getOrgByName,
     postAdmin,

@@ -31,9 +31,9 @@ app.get('/', (req, res) => {
    app.get('/admin/:id', db.getAdminById)
    app.get('/adminemail/:email', db.getAdminByEmail)
    app.get('/guests', db.getGuests)
-   app.get('/guests/:id', db.getGuestsById)
-   app.get('/events/:orgid', db.getEventsById)
-   app.get('/rooms/:id', db.getRoomsById)
+   app.get('/guests/:id', db.getGuestById)
+   app.get('/events/:orgid', db.getEventsByOrgId)
+   app.get('/rooms/:id', db.getRoomsByEventId)
    app.get('/organizations', db.getAllOrgs)
    app.get('/organizations/:orgname', db.getOrgByName)
 
@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
    app.post('/organizations/', db.postOrg)
 
    
-   app.put('/admin/:email', db.updateAdminByEmail)
+   app.put('/adminemail/:email', db.updateAdminByEmail)
 
 
 

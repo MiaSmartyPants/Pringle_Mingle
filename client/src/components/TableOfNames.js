@@ -30,7 +30,7 @@ export const TableOfNames = ({ data }) => {
 
         <div>
           <div>
-            <div>{event.eventNames}</div>
+            <div>{event.event_name}</div>
 
 
 
@@ -46,14 +46,14 @@ export const TableOfNames = ({ data }) => {
               </thead>
 
               <tbody>
-                {event.guest_ids.map((guest) => (
-                  <tr key={guest}>
-                    <td>{guest}</td>
+                {/* {data.guest_id.map((guest) => ( */}
+                  <tr key={event}>
+                    <td>{event.guest_name}</td>
                     {/* <td>{item.lastName}</td>  this will be for the edit button */}
 
                     <td />
                   </tr>
-                ))}
+                {/* ))} */}
               </tbody>
             </table>
             <Popup trigger={<button>Create Groups</button>} position="right center">

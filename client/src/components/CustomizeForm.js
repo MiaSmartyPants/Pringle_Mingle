@@ -10,8 +10,13 @@ export const CustomizeForm = () => {
 
   const [sizeOFGroups, setSizeOfGroups] = useState('');
 
+  const [numOfRounds, setNumOfRounds] = useState('');
+
   const updateSizeOfGroups = (e) => {
     setSizeOfGroups(e.target.value);
+  }
+  const updateNumOfRounds = (e) => {
+    setNumOfRounds(e.target.value);
   }
 
   function handleOnSubmit(e) {
@@ -30,7 +35,7 @@ export const CustomizeForm = () => {
        
         <br></br>
         <div>
-          <label>Size of Groups</label>
+          <label>Size of Groups?</label>
           <input
             component="input"
             type="number"
@@ -40,6 +45,16 @@ export const CustomizeForm = () => {
           />
         </div>
         <br></br>
+        <div>
+          <label>How Many Rounds of Groups?</label>
+          <input
+            component="input"
+            type="number"
+            placeholder=""
+            onChange={updateNumOfRounds}
+            required
+          />
+        </div>
         <div className="buttons">
           <button type="submit">
             Submit

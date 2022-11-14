@@ -14,7 +14,7 @@ export const EnterNames = () => {
         setEventName(e.target.value.toString());
     }
     const updateGuests = (e) => {
-        setGuests(e.target.value);
+        setGuests(e.target.value.split('\n'));
     }
     const updateStaff = (e) => {
         setStaff(e.target.value);
@@ -46,9 +46,8 @@ export const EnterNames = () => {
 
                 <div>
                     <label>Names</label>
-                    <input
+                    <textarea
                         name="Paste List of Names"
-                        type="text"
                         placeholder="Paste List of Names"
                         onChange={updateGuests}
                     />

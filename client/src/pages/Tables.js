@@ -54,6 +54,7 @@ export default function Tables({ org_id }) {
       
       </div>
       <br></br><br></br>
+      {/* table of names load guests names instead of guest guest_ids */}
       <TableOfNames data={events} />
      
 

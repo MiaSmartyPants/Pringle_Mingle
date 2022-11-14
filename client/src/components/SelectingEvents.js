@@ -21,7 +21,7 @@ class SelectingEvents extends Component {
 
   render() {
     const {eventNames} = this.state;
-  
+    console.log('selectingEvent', eventNames)
     return (
       <select onChange={this.handleChange}>
          {eventNames.map((name, index) => {
