@@ -29,16 +29,17 @@ export default function LandingPage() {
   }, [isAuthenticated])
 
 
-  //onsumbit take the user input, send it to the database aloong with the user email and name
-  // const validation = (e) => {
-  //   e.preventDefault();
-  // when user logs in add their info to admins table (addToAdmin),x
-  //if the user already exist, load welcome components,x 
-  //if user does not exist
-  //prompt for organization name,x
-  //when name is submitted, add to organization, if name exists, update admin user to include company name, if name does exist,update admin to company name
-  //in order to update admin with company name, company id must be sent back and made to a gloable variable
-  //post to admin table
+  function orgValidation() {
+    const orgName = prompt('Please enter organization name')
+
+    if (email.includes(orgName.toLowerCase().replace(/\s/g, ''))) {
+      setOrgName(orgName.toLowerCase().replace(/\s/g, ''));
+    } else {
+      alert( "Organization not found. Please use organization email or try again");
+      orgValidation()
+    }
+  }
+
 
   function addToAdmin() {
     fetch('http://localhost:5050/admin', {
@@ -54,13 +55,9 @@ export default function LandingPage() {
       .then(data => {
         console.log("post", data)
         if (data.includes('already exists')) {
-
           console.log('take me to dashboard')
         } else {
-          console.log('user added')
-          const orgName = prompt('Please enter organization name')
-          console.log(orgName.toLowerCase())
-          setOrgName(orgName.toLowerCase());
+          orgValidation();
         }
       })
       .catch((error) => {
@@ -68,20 +65,13 @@ export default function LandingPage() {
       });
   }
 
-  //if isAuthenticated add admin to table, 
-  //if duplication (change coulmn restraint to unique) message, welcome in page
-  //else
-  //then replace getData() with addToOrganization table,
-  //post to organizations
-  //if duplication
-  //else
-  // if success message call update admin to inlude org_id
 
   if (org_name) {
     console.log(org_name)
     addToOrganization();
   }
 
+// Onnce the organization of the user has been  validated, the organization is sent to the database to return an org id
   //post to organizations
   function addToOrganization() {
     fetch('http://localhost:5050/organizations', {
@@ -174,7 +164,7 @@ export default function LandingPage() {
     <div className="landing">
 
 
-      
+
       <section id="home">
         <div className="container">
           <div className="home-text">
@@ -193,14 +183,14 @@ export default function LandingPage() {
               </div>
             )}
             {!!isAuthenticated && (
-        <div>
-          Signin Successful
-          <br></br>
+              <div>
+                Signin Successful
+                <br></br>
 
-          <button className="download-btn" onClick={addToAdmin}>Welcome in!</button>
+                <button className="download-btn" onClick={addToAdmin}>Welcome in!</button>
 
-        </div>
-      )}
+              </div>
+            )}
           </div>
 
           <div className="section-image">

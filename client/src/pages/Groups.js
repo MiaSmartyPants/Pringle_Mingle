@@ -45,13 +45,11 @@ export default function Groups({ org_id, eventId }) {
         }
       }
       setEventNames(arr)
-      console.log(arr)
     }
   }, [eventData])
 
-  //create callback function to recieve event id selected, fetch all rooms with that id
-  //fetch request to get names to tables
-  //pass data to group table
+
+  //fecth all groups from event id
   function getAllRooms(eventId) {
     console.log(eventId)
     // fetch(`http://localhost:5050/rooms/${eventId}`)

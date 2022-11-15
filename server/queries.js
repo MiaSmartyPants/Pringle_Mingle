@@ -48,7 +48,7 @@ const getAdminByEmail = (request, response) => {
   
     const { name, email} = request.body; 
     console.log(request.body)
-  //insert into name email, ord_id and orgName into organization table
+  //insert into name email, and orgName into organization table
     pool.query('INSERT INTO admin (name, email) VALUES ($1, $2) RETURNING *', [name, email], (error, results) => {
       if (error) {
         console.log(error)
@@ -61,9 +61,8 @@ const getAdminByEmail = (request, response) => {
 const updateAdminByEmail = (request, response) => {
   const email = (request.params.email)
   const { org_id } = request.body
-
-  pool.query(
-    'UPDATE admin SET org_id = $1 WHERE email = $2',
+  console.log(email, ':', org_id)
+  pool.query( 'UPDATE admin SET org_id = $1 WHERE email = $2',
     [org_id, email],
     (error, results) => {
       if (error) {

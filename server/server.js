@@ -5,8 +5,8 @@ const app = express()
 const db = require('./queries')
 const cors = require('cors')
 const path = require('path');
-// const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
-// app.use(express.static(REACT_BUILD_DIR));
+const REACT_BUILD_DIR = path.join(__dirname, '..', 'client', 'build');
+app.use(express.static(REACT_BUILD_DIR));
 const ENV = process.env.NODE_ENV;
 const PORT = process.env.PORT || 5050;
 
@@ -21,8 +21,8 @@ app.use(
 
 app.get('/', (req, res) => {
     console.log("server");
-    //  res.send("this will be data")
-    //  res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+     res.send("this will be data")
+     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
    })
 
 
