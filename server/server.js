@@ -20,32 +20,49 @@ app.use(
 )
 
 app.get('/', (req, res) => {
-    console.log("server");
-     res.send("this will be data")
-     res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
-   })
+  console.log("server");
+  res.send("this will be data")
+  res.sendFile(path.join(REACT_BUILD_DIR, 'index.html'));
+})
 
 
+// const sortation = (request, response) => {
+//   const sizeOfGroups = (request.body.sizeOfGroups)
+//   const numOfRounds = (request.body.numOfRounds)
+//   const event_id = 1;
+//   //function to get all guests_ids by event id
+//   db.getGuestsByEventId(event_id)
+//   console.log(sizeOfGroups, numOfRounds)
+//   response.status(201).json({ 'sizeOfGroups': sizeOfGroups, 'numOfRounds': numOfRounds })
+// }
 
-   app.get('/admin', db.getAdmin)
-   app.get('/admin/:id', db.getAdminById)
-   app.get('/adminemail/:email', db.getAdminByEmail)
-   app.get('/guests', db.getGuests)
-   app.get('/guests/:id', db.getGuestById)
-   app.get('/events/:orgid', db.getEventsByOrgId)
-   app.get('/rooms/:id', db.getRoomsByEventId)
-   app.get('/organizations', db.getAllOrgs)
-   app.get('/organizations/:orgname', db.getOrgByName)
+// const getGuestsByEventId = (event_id, sizeOfGroups, numOfRounds) => {
 
+//   console.log(event_id,sizeOfGroups,numOfRounds)
+//   }
 
-   app.post('/admin/', db.postAdmin)
-   app.post('/organizations/', db.postOrg)
+app.get('/admin', db.getAdmin)
+app.get('/admin/:id', db.getAdminById)
+app.get('/adminemail/:email', db.getAdminByEmail)
+app.get('/guests', db.getGuests)
+app.get('/guests/:id', db.getGuestById)
+app.get('/events/:orgid', db.getEventsByOrgId)
+app.get('/rooms/:id', db.getRoomsByEventId)
+app.get('/organizations', db.getAllOrgs)
+app.get('/organizations/:orgname', db.getOrgByName)
+//app.get('/eventguests/:eventid', db.getGuestsByEventId)
 
-   
-   app.put('/adminemail/:email', db.updateAdminByEmail)
+app.post('/adminorgid/', db.postAdminAndOrgId)
+app.post('/admin/', db.postAdmin)
+app.post('/organizations/', db.postOrg)
+app.post('/event/', db.postEvent)
+app.post('/guests/', db.postGuests)
+//app.post('/sortation/', sortation)
+
+app.put('/adminemail/:email', db.updateAdminByEmail)
 
 
 
 app.listen(PORT, () => {
-    console.log(`Example app listening at http://localhost:${PORT}`)
-  })
+  console.log(`Example app listening at http://localhost:${PORT}`)
+})

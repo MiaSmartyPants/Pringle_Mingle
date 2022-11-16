@@ -10,25 +10,39 @@ const initialState = {
     email: '',
     message: '',
 }
-export const ContactForm = (props) => {
+export const ContactForm = ({data}) => {
     const form = useRef();
-const [name, setName] = useState();
-const [email, setEmail] = useState();
+    const [name, setName] = useState();
+    const [email, setEmail] = useState();
 
-const updateName = (e) =>{
-    
-    setName(e.target.value)
-} 
-const updateEmail = (e) =>{
-    
-    setEmail(e.target.value)
-} 
+    const updateName = (e) => {
+
+        setName(e.target.value)
+    }
+    const updateEmail = (e) => {
+
+        setEmail(e.target.value)
+    }
     const sendEmail = (e) => {
         e.preventDefault();
         console.log(name)
         console.log(email)
-        props.postAdmin(name, email);
-
+        console.log(data)
+     
+            fetch('http://localhost:5050/adminorgid/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, name, data}),
+            })
+                .then(response => {
+                    return response.text();
+                })
+                .then(data => {
+                    console.log(data)
+                })
+        
         // emailjs
         //     .sendForm(
         //         "service_t89ekql",
@@ -46,7 +60,7 @@ const updateEmail = (e) =>{
         //             alert("FAILED...", error);
         //         }
         //     );
-    };
+    }
 
     return (
         <div class="container">
@@ -71,7 +85,7 @@ const updateEmail = (e) =>{
                                     </div>
                                     <div class="screen-body">
                                         <div class="screen-body-item left">
-                                            
+
                                             <div class="app-title">
                                                 <span>SEND INVITE</span>
                                                 <span></span>
@@ -82,29 +96,29 @@ const updateEmail = (e) =>{
                                         </div>
                                         <div class="screen-body-item">
                                             <div class="app-form">
-                                               
+
                                                 <div class="app-form-group">
-                                                    <input class="app-form-control"  type='text' name="user_name"  placeholder="NAME" onChange={updateName} required />
+                                                    <input class="app-form-control" type='text' name="user_name" placeholder="NAME" onChange={updateName} required />
                                                 </div>
-                                               
+
                                                 <div class="app-form-group">
-                                                    <input class="app-form-control" type='email' name='user_email'  placeholder="EMAIL" onChange={updateEmail} required/>
+                                                    <input class="app-form-control" type='email' name='user_email' placeholder="EMAIL" onChange={updateEmail} required />
                                                 </div>
-                                                
+
                                                 <div class="app-form-group message">
                                                     <textarea class="app-form-control" name='message' placeholder="MESSAGE" value='Please join me in collaborating on Pringle Mingle' />
                                                 </div>
-                                                
+
                                                 <div class="app-form-group buttons">
                                                     <button class="app-form-button">CANCEL</button>
-                                                    <button tpye='submit'class="app-form-button">SEND</button>
+                                                    <button tpye='submit' class="app-form-button">SEND</button>
                                                 </div>
 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </form>

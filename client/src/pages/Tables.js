@@ -4,14 +4,15 @@ import '../App.css';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { CustomizeForm } from "../components/CustomizeForm";
-import { TableOfNames } from "../components/TableOfNames";
+import { EventsGuestsList } from "../components/EventsGuestsList";
 import { EnterNames } from "../components/EnterNames";
 
 
 
 
-export default function Tables({ org_id }) {
+export default function Tables({ org_id, eventName, guests }) {
   const [events, setEvents] = useState([]);
+  const [data, setData] = useState(org_id);
 
   useEffect(() => {
     // CALL here
@@ -39,6 +40,12 @@ export default function Tables({ org_id }) {
 
       })
   }
+//filter data here to only include unique values of event name and all associated guests
+
+
+const parentToChild = () => {
+  setData(org_id)
+}
 
 
 
@@ -47,15 +54,16 @@ export default function Tables({ org_id }) {
     <div >
       <div>
       <h1>All Your Events</h1>
+      {org_id && 
       <Popup trigger={<button>Create Event Table</button>} position="right center">
             <div>Customize Your Rooms</div>
-            <EnterNames />
+            <EnterNames parentToChild={data}/>
           </Popup>
-      
+      }
       </div>
       <br></br><br></br>
       {/* table of names load guests names instead of guest guest_ids */}
-      <TableOfNames data={events} />
+      <EventsGuestsList data={events} />
      
 
       {/* <button onClick={createRooms}>create breakout rooms</button> */}

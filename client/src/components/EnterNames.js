@@ -3,7 +3,8 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import Papa from 'papaparse';
 
-export const EnterNames = () => {
+
+export const EnterNames = ({parentToChild}) => {
 
     const [file, setFile] = useState();
     const [guests, setGuests] = useState('');
@@ -35,9 +36,37 @@ export const EnterNames = () => {
     function handleOnSubmit(e) {
         e.preventDefault();
         console.log('event name', eventName, 'staf ?', staff, 'guests', guests)
+       
+
+        createEvent();
 
     }
 
+    //add all names to database and event
+function createEvent() {
+    console.log(parentToChild)
+    const eventsAndGuests = {
+        'eventName': eventName,
+        'guests' : guests,
+        'org_id' : parentToChild
+    }
+    fetch('http://localhost:5050/event', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({eventsAndGuests}),
+    })
+      .then(response => {
+        return response.text();
+      })
+      .then(data => {
+        console.log(data)
+        })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
     return (
         <div>
             <div>EnterNames</div>

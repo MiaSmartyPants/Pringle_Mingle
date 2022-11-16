@@ -1,3 +1,5 @@
+const { allowedNodeEnvironmentFlags } = require('process')
+
 const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'me',
@@ -11,25 +13,25 @@ const pool = new Pool({
 
 //select all admin
 const getAdmin = (request, response) => {
-    pool.query('SELECT * FROM admin ORDER BY id ASC', (error, results) => {
-      if (error) {
-        throw error
-      }
-      response.status(200).json(results.rows)
-    })
-  }
+  pool.query('SELECT * FROM admin ORDER BY id ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
 
 //select all admin that belongs to company
-  const getAdminById = (request, response) => {
-    const id = parseInt(request.params.id)
-  
-    pool.query('SELECT * FROM admin WHERE org_id= $1', [id], (error, results) => {
-      if (error) {
-        throw error
-      }
-      response.status(200).json(results.rows)
-    })
-  }
+const getAdminById = (request, response) => {
+  const id = parseInt(request.params.id)
+
+  pool.query('SELECT * FROM admin WHERE org_id= $1', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
 
 //get admin by email
 const getAdminByEmail = (request, response) => {
@@ -43,12 +45,11 @@ const getAdminByEmail = (request, response) => {
   })
 }
 
-  //post admin if signed up
-  const postAdmin = (request, response) => {
-  
-    const { name, email} = request.body; 
-    console.log(request.body)
-  //insert into name email, and orgName into organization table
+//post admin if signed up
+const postAdmin = (request, response) => {
+  const { name, email } = request.body;
+
+
     pool.query('INSERT INTO admin (name, email) VALUES ($1, $2) RETURNING *', [name, email], (error, results) => {
       if (error) {
         console.log(error)
@@ -56,13 +57,30 @@ const getAdminByEmail = (request, response) => {
       }
       response.status(200).json(results.rows)
     })
-  }
+}
+
+//post admin with org id from send invite
+const postAdminAndOrgId = (request, response) => {
+
+  const org_id = parseInt(request.body.data);
+  console.log(request.body)
+  const { name, email } = request.body;
+  pool.query('INSERT INTO admin (name, email, org_id) VALUES ($1, $2, $3) RETURNING *', [name, email, org_id], (error, results) => {
+    if (error) {
+      console.log(error)
+      return response.json(error.detail);
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+
 //put request to uodate admin with org id
 const updateAdminByEmail = (request, response) => {
   const email = (request.params.email)
   const { org_id } = request.body
   console.log(email, ':', org_id)
-  pool.query( 'UPDATE admin SET org_id = $1 WHERE email = $2',
+  pool.query('UPDATE admin SET org_id = $1 WHERE email = $2',
     [org_id, email],
     (error, results) => {
       if (error) {
@@ -91,36 +109,42 @@ const updateAdminByEmail = (request, response) => {
 
 
 
-  /**** Guest queries *****/
+/**** Guest queries *****/
 
-  //select all guests
-  const getGuests = (request, response) => {
-    pool.query('SELECT * FROM guests ORDER BY id ASC', (error, results) => {
-      if (error) {
-        throw error
-      }
-      response.status(200).json(results.rows)
-    })
-  }
+//select all guests
+const getGuests = (request, response) => {
+  pool.query('SELECT * FROM guests ORDER BY id ASC', (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
 
-  //select geuests by id
-  const getGuestById = (request, response) => {
-    const id = parseInt(request.params.id)
-  
-    pool.query('SELECT * FROM guests WHERE id = $1', [id], (error, results) => {
-      if (error) {
-        throw error
-      }
-      response.status(200).json(results.rows)
-    })
-  }
+//select geuests by id
+const getGuestById = (request, response) => {
+  const id = parseInt(request.params.id)
 
-  // post guests with auto org assignment
- 
- 
- 
- 
-  /**** Events Queries *****/
+  pool.query('SELECT * FROM guests WHERE id = $1', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
+
+// post guests with from creating table
+const postGuests = (request, response) => {
+
+  console.log(request.body)
+
+}
+
+
+
+
+/**** Events Queries *****/
 
 //select all events that belong to company
 const getEventsByOrgId = (request, response) => {
@@ -134,20 +158,86 @@ const getEventsByOrgId = (request, response) => {
     response.status(200).json(results.rows)
   })
 }
-//post guest to events
 
-// put guest to event
+//post guest to events
+const postEvent = (request, response) => {
+  const eventName = request.body.eventsAndGuests.eventName;
+  const guestsNames = request.body.eventsAndGuests.guests;
+  const org_id = parseInt(request.body.eventsAndGuests.org_id);
+  const guestIds = [];
+  for (let i = 0; i < guestsNames.length; i++) {
+    pool.query('SELECT name FROM guests WHERE name = $1', [guestsNames[i]], (error, results) => {
+      if (!results.rows.length > 0) {
+        pool.query('INSERT INTO guests (name, org_id) VALUES ($1,$2) RETURNING id', [guestsNames[i], org_id], (error, results) => {
+
+          if (error) {
+            console.log(error)
+          }
+
+        })
+      }
+    })
+    pool.query('SELECT id FROM guests WHERE name = $1', [guestsNames[i]], (error, results) => {
+      console.log(results.rows[0].id)
+      if (error) {
+        console.log(error)
+      }
+
+      guestIds.push(results.rows[0].id)
+      console.log(guestIds)
+      console.log(guestIds.length, guestsNames.length)
+      if (guestIds.length == guestsNames.length) {
+        console.log('events', guestIds)
+        pool.query('INSERT INTO events (event_name, org_id,  guest_ids) VALUES ($1, $2, $3) RETURNING *', [eventName, org_id, guestIds], (error, results) => {
+          if (error) {
+            console.log(error)
+          }
+
+        })
+      }
+    })
+
+  }
+
+}
+
+
 
 //delete guest in event
+// [
+//   {'eventName' :'eventname1',
+//   'guest' : [kim, brad, sussan],}
 
+//   {eventname2 : [kim, brad, sussan],}
 
+// ]
+// allEvents.map( (event)=>{
+//   event[]
 
+// })
+
+//select guests by event id
+
+const getGuestsByEventId = (request, response) => {
+  const id = 1;//event_id;
+  console.log(id)
+  console.log
+  pool.query('SELECT guest_ids FROM events WHERE id = $1 ', [id], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+    const guestsIdsFromEvent = results.rows;
+    console.log(guestsIdsFromEvent)
+  })
+
+}
 
 
 
 /**** Breakout Room Queries *****/
 
-//select all room that belong to event
+//select all rooms and names that belong to event
 const getRoomsByEventId = (request, response) => {
   const id = parseInt(request.params.id)
 
@@ -166,7 +256,7 @@ const getRoomsByEventId = (request, response) => {
 
 //post org
 const postOrg = (request, response) => {
-  const { org_name} = request.body; 
+  const { org_name } = request.body;
   console.log(request.body)
   pool.query('INSERT INTO organizations (org_name) VALUES ($1) RETURNING *', [org_name], (error, results) => {
     if (error) {
@@ -199,19 +289,25 @@ const getOrgByName = (request, response) => {
   })
 }
 
+//sorting function
 
-  module.exports = {
-  
-    getAdmin,
-    getAdminById,
-    getAdminByEmail,
-    getGuests,
-    getGuestById,
-    getEventsByOrgId,
-    getRoomsByEventId,
-    getAllOrgs,
-    getOrgByName,
-    postAdmin,
-    postOrg,
-    updateAdminByEmail
-  }
+module.exports = {
+
+  getAdmin,
+  getAdminById,
+  getAdminByEmail,
+  getGuests,
+  getGuestById,
+  getEventsByOrgId,
+  getRoomsByEventId,
+  getAllOrgs,
+  getOrgByName,
+  postAdmin,
+  postAdminAndOrgId,
+  postEvent,
+  postGuests,
+  postOrg,
+  updateAdminByEmail,
+  getGuestsByEventId
+
+}

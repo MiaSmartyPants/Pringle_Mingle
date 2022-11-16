@@ -8,7 +8,7 @@ import 'reactjs-popup/dist/index.css';
 
 export const CustomizeForm = () => {
 
-  const [sizeOFGroups, setSizeOfGroups] = useState('');
+  const [sizeOfGroups, setSizeOfGroups] = useState('');
 
   const [numOfRounds, setNumOfRounds] = useState('');
 
@@ -21,9 +21,28 @@ export const CustomizeForm = () => {
 
   function handleOnSubmit(e) {
     e.preventDefault();
-    console.log('size of groups', sizeOFGroups)
+    console.log('size of groups', sizeOfGroups,  "number of rounds", numOfRounds)
 
-  }
+
+      // fetch('http://localhost:5050/sortation/', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({ sizeOfGroups, numOfRounds }),
+      // })
+      //   .then(response => {
+      //     return response.text();
+      //   })
+      //   .then(data => {
+          
+       
+      //   })
+      //   .catch((error) => {
+      //     console.error('Error:', error);
+      //   });
+    }
+  
 
 
   return (

@@ -332,6 +332,7 @@ body, button, input {
   flex: 0 1 700px;
   margin: auto;
   padding: 10px;
+  float:right;
  
 }
 
@@ -549,6 +550,7 @@ body, button, input {
 /* navbar */
 :root {
   --navBg: #413f3f;
+  
 }
 
 .navbar {

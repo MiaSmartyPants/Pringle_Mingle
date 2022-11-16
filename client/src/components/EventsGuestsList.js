@@ -4,7 +4,7 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { CustomizeForm } from './CustomizeForm';
 
-export const TableOfNames = ({ data }) => {
+export const EventsGuestsList = ({ data }) => {
   // if(data.length == 0){
   //   return null;
   // }
