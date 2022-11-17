@@ -1,37 +1,37 @@
 import React from 'react'
 
-export const GroupsOfNames = ({data}) => {
+export const GroupsOfNames = ({ org_id,eventNames }) => {
+  console.log('GroupofNames org id:', org_id)
 
+  //show tables for only whats selected
+  // if groups have not been made
+  //display sorry create grous here
+
+  //funtion to reformat the data
+    // function f(events) {
+  //   if (events === undefined || events === null) {
+  //     throw new Error();
+  //   }
+  //   const result = {};
+  //   for (const item of events) {
+  //       if (!(item.id in result)) {
+  //           result[item.id] = {
+  //               'event_name': item.event_name,
+  //               'guest_names': [],
+  //           }
+  //       }
+  //       const obj = result[item.id];
+  //       obj['guest_names'].push(item.guest_name);
+  //   }
+  //   console.log(result)
+  //   setResult(result);
+  //  }
 
   return (
     <div>
 
-      {/* encase the whole thing in a map? */}
-      <h3>{data.groupName}</h3>
-      <table class="styled-table">
-      <thead>
-        <tr>
-         
-          <th>First Name</th>
-          <th>Last Name</th>
-       
-          
-        </tr>
-      </thead>
- 
-      <tbody>
-        {data.mockData.map((item, index) => (
-          <tr key={item.key}>
-         
-            <td>{item.firstName}</td>
-            <td>{item.lastName}</td>
-           
-            <td />
-          </tr>
-        ))}
-      </tbody>
-    </table> 
-
     </div>
+
+
   )
 }
