@@ -8,6 +8,7 @@ import SelectingEvents from '../components/SelectingEvents.js';
 export default function Groups({ org_id, eventId }) {
   const [eventData, setEventData] = useState();
   const [eventNames, setEventNames] = useState();
+  const [allRooms, setAllRooms] = useState();
 
 
   useEffect(() => {
@@ -45,22 +46,24 @@ export default function Groups({ org_id, eventId }) {
         }
       }
       setEventNames(arr)
+      getAllRooms()
     }
   }, [eventData])
 
 
   //fecth all groups from event id
-  function getAllRooms(eventId) {
-    console.log(eventId)
-    // fetch(`http://localhost:5050/rooms/${eventId}`)
-    //   .then((response) => response)
-    //   .then((data) => {
-    //     return data.json();
-    //   })
-    //   .then((data) => {
-    //     console.log("data", data)
-    //     setEventData(data)
-    //   })
+  function getAllRooms(){//eventId) {
+    //console.log(eventId)
+    const eventId = 1;
+    fetch(`http://localhost:5050/rooms/1`)//${eventId}`)
+      .then((response) => response)
+      .then((data) => {
+        return data.json();
+      })
+      .then((data) => {
+        console.log("all rooms", data)
+        setAllRooms(data)
+      })
   }
 
 
@@ -70,8 +73,9 @@ export default function Groups({ org_id, eventId }) {
       {/* selecting events needs a callback function so that so i can get a fetch request all rooms with event id */}
       {!!eventNames &&
         <SelectingEvents eventNames={eventNames} getAllRooms={getAllRooms} />
-        //{/* <GroupsOfNames org_id={org_id} eventNames={eventNames}/> */}
+        
       }
+      {!!allRooms && <GroupsOfNames allRooms={allRooms}/> }
       export to sheets here
     </div>
   );

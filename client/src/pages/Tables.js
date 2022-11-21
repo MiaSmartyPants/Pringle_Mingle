@@ -19,6 +19,7 @@ export default function Tables({ org_id, eventName, guests }) {
     // CALL here
     if (org_id) {
       getData()
+      setData(org_id)
     }
 
     console.log('Tables', org_id)
@@ -72,9 +73,7 @@ function f(events) {
  setResult(result);
 }
 
-const parentToChild = () => {
-  setData(org_id)
-}
+
 
 
 
@@ -83,10 +82,10 @@ const parentToChild = () => {
     <div >
       <div>
       <h1>All Your Events</h1>
-      {org_id && 
+      {data && 
       <Popup trigger={<button>Create Event Table</button>} position="right center">
             <div>Customize Your Rooms</div>
-            <EnterNames parentToChild={data}/>
+            <EnterNames org_id={data}/>
           </Popup>
       }
       </div>
