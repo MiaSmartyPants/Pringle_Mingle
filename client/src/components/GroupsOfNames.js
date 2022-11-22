@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 export const GroupsOfNames = ({ allRooms }) => {
-  const [result, setResult] = useState();
+  const [roundsOfNames, setRoundsOfNames] = useState();
 
 
  //trying to make an object that i can later turn into a table
@@ -15,42 +15,52 @@ export const GroupsOfNames = ({ allRooms }) => {
       room 1: guest names[]
           room 2; guest names[]
         }*/
-  function f(allRooms) {
+  function groupRoomsByRounds(allRooms) {
     if (allRooms === undefined || allRooms === null) {
       throw new Error();
     }
     const result = {};
-    for (const item of allRooms) {
-      if (!(item.round in result)) {
-        result[item.round] = {
-          'round': item.round,
-            'break out rooms': {
-              'room name': item.room,
-              'guest_names': [],
-            }
+    for (const room of allRooms) {
+      if (!(room.round in result)) {
+        result[room.round] = {
+          'round': room.round,
+            'break_out_room_guests': [
+              room.guest_names
+            ]
           }
+        }else{
+         // console.log('result', result)
+          result[room.round]['break_out_room_guests'] = [...result[room.round]['break_out_room_guests'], room.guest_names]
         }
-      
-      const obj = result[item.round];
-       obj['break out rooms']['guest_names'].push(item.guest_names);
-      obj['break out rooms']['room name'] = (item.room);
+
     }
-    console.log('rounds of names', result)
-    setResult(result);
+    console.log('rounds of names', Object.values(result))
+    setRoundsOfNames(Object.values(result));
   }
   
   useEffect(() => {
     // CALL here
     if (allRooms) {
-      f(allRooms)
+      groupRoomsByRounds(allRooms)
     }
 
   }, [])
   return (
     <div>
+      {!!roundsOfNames && 
 <form>
-  <textarea disabled value={"groups Will be displayed here for copyable ability"} rows="5" cols="40"/>
+{Object.values(roundsOfNames).map(({round, break_out_room_guests}) => (
+  <div>
+  <h4>Round {round}</h4>
+
+      <textarea  defaultValue={break_out_room_guests.join('\r\n\r\n')} rows="15" cols="40"/>
+
+  
+    </div>
+))}
+
 </form>
+}
     </div>
 
 

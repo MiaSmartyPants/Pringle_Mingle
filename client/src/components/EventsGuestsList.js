@@ -26,7 +26,7 @@ if (result === undefined || result == null) {
   return (
     <div>
 
-      {Object.values(result).map(({id, event_name, guest_names}) => (
+      {Object.values(result).map(({event_id, event_name, guest_names}) => (
 
         <div>
       
@@ -51,8 +51,8 @@ if (result === undefined || result == null) {
               </thead>
 
               <tbody>
-                {guest_names.map((guest) => (
-                  <tr key={id}>
+                {guest_names.map((guest, index) => (
+                  <tr key={index}>
                     <td>{guest}</td> 
                      <td />
                   </tr>
@@ -61,7 +61,7 @@ if (result === undefined || result == null) {
             </table>
             <Popup trigger={<button onClick={updateEventId}>Create Groups</button>} position="right center">
               <div>Customize Your Rooms</div>
-              <CustomizeForm  />
+              <CustomizeForm eventId={event_id} />
             </Popup>
             <br></br><br></br><br></br> <br></br><br></br><br></br>
           </div></div>

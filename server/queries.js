@@ -205,7 +205,7 @@ const postEvent = async (request, response) => {
 const getRoomsByEventId = (request, response) => {
   const id = parseInt(request.params.id)
 //console.log(request.params)
-  pool.query('SELECT * From rooms WHERE event_id = $1', [id], (error, results) => {
+  pool.query('SELECT round, guest_names, room From rooms  WHERE event_id = $1 ORDER BY round ASC', [id], (error, results) => {
     if (error) {
       throw error
     }
@@ -267,8 +267,8 @@ const getOrgByName = (request, response) => {
 
 const sortation = async (request) => {
  
-  //const id = (request.body.event_id)
-  const id = 1;
+  const id = parseInt(request.body.eventId)
+ 
 
   const text = 'SELECT  g.name as guest_name FROM events as e JOIN guests as g on g.id = any(e.guest_ids) WHERE e.id = $1'
   const values = [id];

@@ -62,6 +62,7 @@ function f(events) {
  for (const item of events) {
      if (!(item.id in result)) {
          result[item.id] = {
+           'event_id': item.id,
              'event_name': item.event_name,
              'guest_names': [],
          }
@@ -69,9 +70,10 @@ function f(events) {
      const obj = result[item.id];
      obj['guest_names'].push(item.guest_name);
  }
- //console.log('result', result)
+ console.log('result', result)
  setResult(result);
 }
+//result = []
 
 
 

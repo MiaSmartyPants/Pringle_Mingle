@@ -23,7 +23,7 @@ const eventId = (e.target.value)
 
   render() {
     const eventData = this.state.eventData;
-    console.log('selectingEvent', eventData)
+    //console.log('selectingEvent', eventData)
     return (
       <select onChange={this.handleChange}>
          {eventData.map(({event_name, id}, index) => {

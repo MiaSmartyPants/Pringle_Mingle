@@ -6,7 +6,7 @@ import 'reactjs-popup/dist/index.css';
 
 
 
-export const CustomizeForm = () => {
+export const CustomizeForm = ({eventId}) => {
 
   const [sizeOfGroups, setSizeOfGroups] = useState('');
 
@@ -18,7 +18,7 @@ export const CustomizeForm = () => {
   const updateNumOfRounds = (e) => {
     setNumOfRounds(e.target.value);
   }
-
+console.log('event id', eventId)
   function handleOnSubmit(e) {
     e.preventDefault();
     console.log('size of groups', sizeOfGroups,  "number of rounds", numOfRounds)
@@ -29,7 +29,7 @@ export const CustomizeForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ sizeOfGroups, numOfRounds }),
+        body: JSON.stringify({ sizeOfGroups, numOfRounds,eventId }),
       })
         .then(response => {
           return response.text();

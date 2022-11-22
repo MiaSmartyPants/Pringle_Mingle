@@ -61,7 +61,7 @@ export default function Groups({ org_id, eventId }) {
         return data.json();
       })
       .then((data) => {
-        //console.log("all rooms", data)
+        console.log("all rooms", data)
         setAllRooms(data)
       })
   }
