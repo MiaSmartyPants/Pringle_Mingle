@@ -330,9 +330,10 @@ body, button, input {
 
 .container {
   flex: 0 1 700px;
-  margin: auto;
+
   padding: 10px;
   float:right;
+  margin-top: 0%;
  
 }
 
@@ -626,4 +627,24 @@ body, button, input {
 
 span {
   margin-left: 16px;
+}
+
+
+/* dashboard */
+.parent {
+
+  margin: 1rem;
+  padding: 2rem 2rem;
+  float: right;
+}
+.child {
+  padding: 1rem 1rem;
+ 
+}
+.pic{
+  float: right;
+
+}
+.graph{
+  float: left;
 }

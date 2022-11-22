@@ -72,7 +72,7 @@ const postAdmin = (request, response) => {
 //post admin with org id from send invite
 const postAdminAndOrgId = (request, response) => {
 
-  const org_id = parseInt(request.body.data);
+  const org_id = parseInt(request.body.orgId);
   console.log(request.body)
   const { name, email } = request.body;
   pool.query('INSERT INTO admin (name, email, org_id) VALUES ($1, $2, $3) RETURNING *', [name, email, org_id], (error, results) => {
@@ -100,21 +100,7 @@ const updateAdminByEmail = (request, response) => {
     }
   )
 }
-// const updateAdminByEmail = (request, response) => {
-//   const email = (request.params.email)
-//   const { org_id } = request.body
 
-//   pool.query(
-//     'UPDATE admin SET org_id = $1 WHERE email = $2',
-//     [org_id, email],
-//     (error, results) => {
-//       if (error) {
-//         throw error
-//       }
-//       response.status(200).send(`User modified with ID: ${email}`)
-//     }
-//   )
-// }
 
 
 
@@ -168,6 +154,19 @@ const getEventsByOrgId = (request, response) => {
     response.status(200).json(results.rows)
   })
 }
+
+const getEventList = (request, response) => {
+  const orgid = parseInt(request.params.orgid)
+  console.log(orgid)
+
+  pool.query('SELECT id, event_name FROM events WHERE org_id = $1', [orgid], (error, results) => {
+    if (error) {
+      throw error
+    }
+    response.status(200).json(results.rows)
+  })
+}
+
 //posts event guests if not already present, and then posts the event name and guest ids into event table
 //post guest to events
 const postEvent = async (request, response) => {
@@ -193,38 +192,7 @@ const postEvent = async (request, response) => {
     console.log(error)
   }
 
-  // pool.query('SELECT * FROM guests WHERE name = $1', [guestsNames[i]], (error, results) => {
-  //   if (results.rows.length == 0) {
-  //     pool.query('INSERT INTO guests (name, org_id) VALUES ($1,$2) RETURNING *', [guestsNames[i], org_id], (error, results) => {
-
-  //       if (error) {
-  //         console.log(error)
-  //       }
-  //       guestId = results.rows[0].id
-  //     })
-  //   }else{
-  //     guestId = results.rows[0].id
-  //   }
-  // })
-  // pool.query('SELECT id FROM guests WHERE name = $1', [guestsNames[i]], (error, results) => {
-  //   console.log(results.rows[0].id)
-  //   if (error) {
-  //     console.log(error)
-  //   }
-
-  //   guestIds.push(results.rows[0].id)
-  //   console.log(guestIds)
-  //   console.log(guestIds.length, guestsNames.length)
-  //   if (guestIds.length == guestsNames.length) {
-  //     console.log('events', guestIds)
-  //     pool.query('INSERT INTO events (event_name, org_id,  guest_ids) VALUES ($1, $2, $3) RETURNING *', [eventName, org_id, guestIds], (error, results) => {
-  //       if (error) {
-  //         console.log(error)
-  //       }
-
-  //     })
-  //   }
-  // })
+  
 
 
 }
@@ -236,16 +204,20 @@ const postEvent = async (request, response) => {
 //select all rooms and names that belong to event
 const getRoomsByEventId = (request, response) => {
   const id = parseInt(request.params.id)
-
-  pool.query('SELECT r.id, r.room, r.event_id, r.round, g.name as guest_name FROM rooms as r JOIN guests as g on g.id = ANY(r.guest_ids) WHERE r.event_id = $1', [id], (error, results) => {
+//console.log(request.params)
+  pool.query('SELECT * From rooms WHERE event_id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
     response.status(200).json(results.rows)
   })
 }
-//select all names that belongs to room $1
 
+//insert into room  values groups, evnt id, round (num of rounds=i), 
+const postGroups = (round,group, id ) => {
+  console.log('post groups', round,group, id )
+  pool.query('INSERT INTO rooms (guest_names, event_id, round) VALUES ($1, $2, $3) RETURNING *', [group, id, round]) 
+}
 
 
 /*** Organization Queries ****/
@@ -288,16 +260,12 @@ const getOrgByName = (request, response) => {
 
 
 
+/***** Sorting Function ******/
 
 
-
-
-
-
-//sorting function
 //select guests by event id
 
-const getGuestsByEventId = async (request) => {
+const sortation = async (request) => {
  
   //const id = (request.body.event_id)
   const id = 1;
@@ -454,12 +422,19 @@ function computeGroups() {
 
 for (let i = 0; i < numOfRounds; i++) {
   const groups = computeGroups();
-  console.log('===');
-  console.log(groups);
-  console.log('===');
+  //call dstabse query to insert groups into rooms table
+  for (let j = 0; j < groups.length; j++){
+    //console.log(i+1,groups[j])
+ 
+   postGroups(i+1,groups[j], id )
+  }
+ 
+  // console.log('===');
+  // console.log(groups);
+  // console.log('===');
 }
 
-console.log(metWith);
+// console.log(metWith);
 
 }
 
@@ -476,13 +451,14 @@ module.exports = {
   getRoomsByEventId,
   getAllOrgs,
   getOrgByName,
+  getEventList,
   postAdmin,
   postAdminAndOrgId,
   postEvent,
   postGuests,
   postOrg,
   updateAdminByEmail,
-  getGuestsByEventId,
+  sortation,
 
 
 }

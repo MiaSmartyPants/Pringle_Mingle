@@ -1,11 +1,13 @@
-import { eventNames } from 'process'
-import React from 'react'
+
+import React, {useState} from 'react'
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { CustomizeForm } from './CustomizeForm';
 
+
 export const EventsGuestsList = ({ result }) => {
-  
+  const [eventId, setEventId] = useState();
+
 if (result === undefined || result == null) {
   throw new Error();
 }
@@ -13,16 +15,22 @@ if (result === undefined || result == null) {
 //console.log(result[0].event_name, result.guest_names)
 
 
+ const updateEventId = ({id}) => {
+  console.log('key', id)
+  //seteventId(key)
+}
+
+
 
 
   return (
     <div>
 
-      {Object.values(result).map((event, index) => (
+      {Object.values(result).map(({id, event_name, guest_names}) => (
 
         <div>
       
-              {/* <title>{event.event_name}</title> */}
+           <h3>{event_name}</h3>
             
           <div>
         
@@ -37,27 +45,25 @@ if (result === undefined || result == null) {
                 <tr>
 
                   <th>Name</th>
-                  <th>Delete</th>
+                 
 
                 </tr>
               </thead>
 
               <tbody>
-                {event.guest_names.map((guest) => (
-                  <tr key={event}>
+                {guest_names.map((guest) => (
+                  <tr key={id}>
                     <td>{guest}</td> 
-                    {/* <td>{item.lastName}</td>  this will be for the edit button */}
                      <td />
                   </tr>
                  ))}  
               </tbody>
             </table>
-            <Popup trigger={<button>Create Groups</button>} position="right center">
+            <Popup trigger={<button onClick={updateEventId}>Create Groups</button>} position="right center">
               <div>Customize Your Rooms</div>
-              <CustomizeForm />
+              <CustomizeForm  />
             </Popup>
-            <button>Add Guest</button>
-
+            <br></br><br></br><br></br> <br></br><br></br><br></br>
           </div></div>
       ))}
       <br></br><br></br><br></br> <br></br><br></br><br></br>

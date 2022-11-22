@@ -8,18 +8,12 @@ export const GroupsOfNames = ({ allRooms }) => {
     // for every round has multiple rooms, each room has their  array of guests
       /*{
         round 1:{
-              room name : room1
-              guestnames: []
-          
-              room name : room2
-              guestnames: []
+          group1: guest names[]
+          group 2; guest names[]
         }
         round 2:{
-         room name : room1
-              guestnames: []
-          
-              room name : room2
-              guestnames: []
+      room 1: guest names[]
+          room 2; guest names[]
         }*/
   function f(allRooms) {
     if (allRooms === undefined || allRooms === null) {
@@ -38,10 +32,10 @@ export const GroupsOfNames = ({ allRooms }) => {
         }
       
       const obj = result[item.round];
-       obj['break out rooms']['guest_names'].push(item.guest_name);
+       obj['break out rooms']['guest_names'].push(item.guest_names);
       obj['break out rooms']['room name'] = (item.room);
     }
-    console.log('/groupsofnames', result)
+    console.log('rounds of names', result)
     setResult(result);
   }
   
@@ -54,7 +48,9 @@ export const GroupsOfNames = ({ allRooms }) => {
   }, [])
   return (
     <div>
-
+<form>
+  <textarea disabled value={"groups Will be displayed here for copyable ability"} rows="5" cols="40"/>
+</form>
     </div>
 
 

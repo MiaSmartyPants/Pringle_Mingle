@@ -69,7 +69,7 @@ function f(events) {
      const obj = result[item.id];
      obj['guest_names'].push(item.guest_name);
  }
- console.log(result)
+ //console.log('result', result)
  setResult(result);
 }
 
@@ -93,9 +93,6 @@ function f(events) {
       {/* table of names load guests names instead of guest guest_ids */}
       {result && <EventsGuestsList result={result} />}
       
-     
-
-      {/* <button onClick={createRooms}>create breakout rooms</button> */}
 
     </div>
   );
