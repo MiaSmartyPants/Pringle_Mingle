@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import JsonData from "./data/data.json";
 import Navbar from "./components/Navbar";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import {useAuth0} from "@auth0/auth0-react";
 import Fetch  from "./components/Fetch";
