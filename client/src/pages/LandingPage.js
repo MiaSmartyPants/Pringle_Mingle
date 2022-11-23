@@ -182,7 +182,7 @@ export default function LandingPage() {
           </div>
 
           <div className="section-image">
-            <img src="./images/hero_right.webp" alt="app preview" />
+            <img src="" alt="app preview" />
           </div>
         </div>
       </section>
