@@ -35,7 +35,7 @@ export default function LandingPage() {
     if (email.includes(orgName.toLowerCase().replace(/\s/g, ''))) {
       setOrgName(orgName.toLowerCase().replace(/\s/g, ''));
     } else {
-      alert( "Organization not found. Please use organization email or try again");
+      alert("Organization not found. Please use organization email or try again");
       orgValidation()
     }
   }
@@ -43,7 +43,7 @@ export default function LandingPage() {
 
   function addToAdmin() {
     console.log('addToAdmin')
-    fetch('http://localhost:5050/admin', {
+    fetch('/admin', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,10 +72,10 @@ export default function LandingPage() {
     addToOrganization();
   }
 
-// Onnce the organization of the user has been  validated, the organization is sent to the database to return an org id
+  // Onnce the organization of the user has been  validated, the organization is sent to the database to return an org id
   //post to organizations
   function addToOrganization() {
-    fetch('http://localhost:5050/organizations', {
+    fetch('/organizations', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ export default function LandingPage() {
 
 
   function getOrganizations() {
-    fetch(`http://localhost:5050/organizations/${org_name}`)
+    fetch(`/organizations/${org_name}`)
 
       //return the response
       .then((response) => response)
@@ -130,7 +130,7 @@ export default function LandingPage() {
   function updateAdmin() {
     //finally this function will get the admin org id for the whole program
     console.log('org_id', org_id)
-    fetch(`http://localhost:5050/adminupdate/${email}`, {
+    fetch(`/adminupdate/${email}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

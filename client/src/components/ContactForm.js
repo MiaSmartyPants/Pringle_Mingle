@@ -29,7 +29,8 @@ export const ContactForm = ({orgId}) => {
         console.log(email)
         console.log(orgId)
      
-            fetch('http://localhost:5050/adminorgid/', {
+        
+            fetch('/adminorgid/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

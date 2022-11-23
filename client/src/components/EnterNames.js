@@ -36,10 +36,7 @@ export const EnterNames = ({org_id}) => {
     function handleOnSubmit(e) {
         e.preventDefault();
         console.log('event name', eventName, 'guests', guests)
-       
-
         createEvent();
-
     }
 
     //add all names to database and event
@@ -50,7 +47,7 @@ function createEvent() {
         'guests' : guests,
         'org_id' : org_id
     }
-    fetch('http://localhost:5050/event', {
+    fetch('/event', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
