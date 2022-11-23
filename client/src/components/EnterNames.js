@@ -74,7 +74,7 @@ function createEvent() {
                     <label>Names</label>
                     <textarea
                         name="Paste List of Names"
-                        placeholder="Paste List of Names"
+                        placeholder="One name per line please"
                         onChange={updateGuests}
                     />
                 </div>

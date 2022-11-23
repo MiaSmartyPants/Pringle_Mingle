@@ -59,7 +59,6 @@ app.post('/adminorgid/', db.postAdminAndOrgId)
 app.post('/admin', db.postAdmin)
 app.post('/organizations/', db.postOrg)
 app.post('/event', db.postEvent)
-app.post('/guests/', db.postGuests)
 app.post('/sortation', db.sortation)
 
 app.put('/adminupdate/:email', db.updateAdminByEmail)

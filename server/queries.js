@@ -23,43 +23,54 @@ client.connect()
 
 //select all admin
 const getAdmin = (request, response) => {
-  pool.query('SELECT * FROM admin ORDER BY id ASC', (error, results) => {
+  try{
+    pool.query('SELECT * FROM admin ORDER BY id ASC', (error, results) => {
     if (error) {
       throw error
     }
     response.status(200).json(results.rows)
   })
+  }
+  catch(error){
+console.log(error)
+  }
 }
 
 //select all admin that belongs to company
 const getAdminById = (request, response) => {
   const id = parseInt(request.params.id)
-
+try{
   pool.query('SELECT * FROM admin WHERE org_id= $1', [id], (error, results) => {
-    if (error) {
-      throw error
-    }
     response.status(200).json(results.rows)
   })
+}
+catch(error){
+  console.log(error)
+    }
 }
 
 //get admin by email
 const getAdminByEmail = (request, response) => {
   const email = (request.params.email)
   console.log(email)
-  pool.query("SELECT * FROM admin WHERE email = $1 ", [email], (error, results) => {
+  try{
+     pool.query("SELECT * FROM admin WHERE email = $1 ", [email], (error, results) => {
     if (error) {
       throw error
     }
     response.status(200).json(results.rows)
   })
+  }
+ catch(error){
+   console.log(error)
+ }
 }
 
 //post admin if signed up
 const postAdmin = (request, response) => {
   const { name, email } = request.body;
 
-
+try{
   pool.query('INSERT INTO admin (name, email) VALUES ($1, $2) RETURNING *', [name, email], (error, results) => {
     if (error) {
       console.log(error)
@@ -68,6 +79,10 @@ const postAdmin = (request, response) => {
     response.status(200).json(results.rows)
   })
 }
+catch(error){
+  console.log(error)
+    }
+}
 
 //post admin with org id from send invite
 const postAdminAndOrgId = (request, response) => {
@@ -75,13 +90,19 @@ const postAdminAndOrgId = (request, response) => {
   const org_id = parseInt(request.body.orgId);
   console.log(request.body)
   const { name, email } = request.body;
-  pool.query('INSERT INTO admin (name, email, org_id) VALUES ($1, $2, $3) RETURNING *', [name, email, org_id], (error, results) => {
+  try{
+     pool.query('INSERT INTO admin (name, email, org_id) VALUES ($1, $2, $3) RETURNING *', [name, email, org_id], (error, results) => {
     if (error) {
       console.log(error)
       return response.json(error.detail);
     }
     response.status(200).json(results.rows)
   })
+  }
+  catch(error){
+    console.log(error)
+      }
+ 
 }
 
 
@@ -90,7 +111,8 @@ const updateAdminByEmail = (request, response) => {
   const email = (request.params.email)
   const { org_id } = request.body
   console.log(email, ':', org_id)
-  pool.query('UPDATE admin SET org_id = $1 WHERE email = $2',
+  try {
+    pool.query('UPDATE admin SET org_id = $1 WHERE email = $2',
     [org_id, email],
     (error, results) => {
       if (error) {
@@ -99,6 +121,10 @@ const updateAdminByEmail = (request, response) => {
       response.status(200).send(`User modified with ID: ${email}`)
     }
   )
+  }
+  catch(error){
+    console.log(error)
+      }
 }
 
 
@@ -109,32 +135,34 @@ const updateAdminByEmail = (request, response) => {
 
 //select all guests
 const getGuests = (request, response) => {
-  pool.query('SELECT * FROM guests ORDER BY id ASC', (error, results) => {
+  try{
+   pool.query('SELECT * FROM guests ORDER BY id ASC', (error, results) => {
     if (error) {
       throw error
     }
     response.status(200).json(results.rows)
-  })
+  }) 
+  }
+
+  catch(error){
+    console.log(error)
+      }
 }
 
 //select geuests by id
 const getGuestById = (request, response) => {
   const id = parseInt(request.params.id)
-
-  pool.query('SELECT * FROM guests WHERE id = $1', [id], (error, results) => {
+try{
+   pool.query('SELECT * FROM guests WHERE id = $1', [id], (error, results) => {
     if (error) {
       throw error
     }
     response.status(200).json(results.rows)
   })
 }
-
-
-// post guests with from creating table
-const postGuests = (request, response) => {
-
-  console.log(request.body)
-
+catch(error){
+  console.log(error)
+    }
 }
 
 
@@ -146,7 +174,7 @@ const postGuests = (request, response) => {
 const getEventsByOrgId = (request, response) => {
   const orgid = parseInt(request.params.orgid)
   console.log(orgid)
-
+try{
   pool.query('SELECT e.id, e.event_name, e.org_id, g.id as guest_id, g.name as guest_name FROM events as e JOIN guests as g on g.id = any(e.guest_ids) WHERE e.org_id = $1;', [orgid], (error, results) => {
     if (error) {
       throw error
@@ -154,17 +182,25 @@ const getEventsByOrgId = (request, response) => {
     response.status(200).json(results.rows)
   })
 }
+catch(error){
+  console.log(error)
+    }
+}
 
 const getEventList = (request, response) => {
   const orgid = parseInt(request.params.orgid)
   console.log(orgid)
-
+try{
   pool.query('SELECT id, event_name FROM events WHERE org_id = $1', [orgid], (error, results) => {
     if (error) {
       throw error
     }
     response.status(200).json(results.rows)
-  })
+  }) 
+}
+catch(error){
+  console.log(error)
+    }
 }
 
 //posts event guests if not already present, and then posts the event name and guest ids into event table
@@ -205,18 +241,28 @@ const postEvent = async (request, response) => {
 const getRoomsByEventId = (request, response) => {
   const id = parseInt(request.params.id)
 //console.log(request.params)
-  pool.query('SELECT round, guest_names, room From rooms  WHERE event_id = $1 ORDER BY round ASC', [id], (error, results) => {
+try{
+   pool.query('SELECT round, guest_names, room From rooms  WHERE event_id = $1 ORDER BY round ASC', [id], (error, results) => {
     if (error) {
       throw error
     }
     response.status(200).json(results.rows)
   })
 }
+catch(error){
+  console.log(error)
+    }
+}
 
 //insert into room  values groups, evnt id, round (num of rounds=i), 
 const postGroups = (round,group, id ) => {
   console.log('post groups', round,group, id )
+  try{
   pool.query('INSERT INTO rooms (guest_names, event_id, round) VALUES ($1, $2, $3) RETURNING *', [group, id, round]) 
+  }
+  catch(error){
+    console.log(error)
+      }
 }
 
 
@@ -226,35 +272,50 @@ const postGroups = (round,group, id ) => {
 const postOrg = (request, response) => {
   const { org_name } = request.body;
   console.log(request.body)
-  pool.query('INSERT INTO organizations (org_name) VALUES ($1) RETURNING *', [org_name], (error, results) => {
+  try{
+    pool.query('INSERT INTO organizations (org_name) VALUES ($1) RETURNING *', [org_name], (error, results) => {
     if (error) {
       console.log(error)
       return response.json(error.detail);
     }
     response.status(200).json(results.rows)
   })
+  }
+  catch(error){
+    console.log(error)
+      }
 }
 
 //select all orgs
 const getAllOrgs = (request, response) => {
-  pool.query('SELECT * FROM organizations ORDER BY id ASC', (error, results) => {
+  try{
+   pool.query('SELECT * FROM organizations ORDER BY id ASC', (error, results) => {
     if (error) {
       throw error
     }
     response.status(200).json(results.rows)
-  })
+  }) 
+  }
+  catch(error){
+    console.log(error)
+      }
 }
 
 //select org where name =$1
 const getOrgByName = (request, response) => {
   const org_name = (request.params.orgname)
   console.log(org_name)
-  pool.query("SELECT * FROM organizations WHERE org_name = $1 ", [org_name], (error, results) => {
+  try{
+   pool.query("SELECT * FROM organizations WHERE org_name = $1 ", [org_name], (error, results) => {
     if (error) {
       throw error
     }
     response.status(200).json(results.rows)
-  })
+  }) 
+  }
+  catch(error){
+    console.log(error)
+      }
 }
 
 
@@ -455,7 +516,6 @@ module.exports = {
   postAdmin,
   postAdminAndOrgId,
   postEvent,
-  postGuests,
   postOrg,
   updateAdminByEmail,
   sortation,
