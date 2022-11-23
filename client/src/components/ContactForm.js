@@ -46,10 +46,10 @@ export const ContactForm = ({orgId}) => {
         
         emailjs
             .sendForm(
-                "service_t89ekql",
-                "template_i0s4ldb",
+                process.env.REACT_APP_SERVICE_ID,
+                process.env.REACT_APP_TEMPLATE_ID,
                 form.current,
-                "4bZhmL4s715tTifG_"
+                process.env.REACT_APP_USER_ID
             )
             .then(
                 (result) => {
