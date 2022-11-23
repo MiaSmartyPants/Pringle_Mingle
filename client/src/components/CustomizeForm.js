@@ -23,8 +23,7 @@ console.log('event id', eventId)
     e.preventDefault();
     console.log('size of groups', sizeOfGroups,  "number of rounds", numOfRounds)
 
-
-      fetch('http://localhost:5050/sortation', {
+      fetch('/sortation', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

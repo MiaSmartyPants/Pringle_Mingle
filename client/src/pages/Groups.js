@@ -21,7 +21,7 @@ export default function Groups({ org_id, eventId }) {
 
   // select all event with org_id
   function getEventData() {
-    fetch(`http://localhost:5050/eventlist/${org_id}`)
+    fetch(`/eventlist/${org_id}`)
 
       .then((response) => response)
       .then((data) => {
@@ -46,16 +46,16 @@ export default function Groups({ org_id, eventId }) {
   //       }
   //     }
   //     setEventNames(arr)
- 
+
   //   }
   // }, [allRooms])
 
 
   //fecth all groups from event id
-  function getAllRooms(eventId){//eventId) {
+  function getAllRooms(eventId) {//eventId) {
     console.log('/groups with fetch', eventId)
-    
-    fetch(`http://localhost:5050/rooms/${eventId}`)//${eventId}`)
+
+    fetch(`/rooms/${eventId}`)//${eventId}`)
       .then((response) => response)
       .then((data) => {
         return data.json();
@@ -73,10 +73,10 @@ export default function Groups({ org_id, eventId }) {
       {/* selecting events needs a callback function so that so i can get a fetch request all rooms with event id */}
       {!!eventData &&
         <SelectingEvents eventData={eventData} getAllRooms={getAllRooms} />
-        
+
       }
       <br></br><br></br><br></br><br></br>
-      {!!allRooms && <GroupsOfNames allRooms={allRooms}/> }
+      {!!allRooms && <GroupsOfNames allRooms={allRooms} />}
     </div>
   );
 }

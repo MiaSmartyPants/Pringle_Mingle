@@ -30,7 +30,7 @@ export default function Tables({ org_id, eventName, guests }) {
   //   }
   // fecth data is called to get events with  with orgid
   function getData() {
-    fetch(`http://localhost:5050/events/${org_id}`)
+    fetch(`/events/${org_id}`)
 
       .then((response) => response)
       .then((data) => {
@@ -42,38 +42,38 @@ export default function Tables({ org_id, eventName, guests }) {
 
       })
   }
-//filter data here to only include unique values of event name and all associated guests
-useEffect(() => {
-  // CALL here
-  if(events){
-    f(events)
+  //filter data here to only include unique values of event name and all associated guests
+  useEffect(() => {
+    // CALL here
+    if (events) {
+      f(events)
+    }
+
+  }, [events])
+
+
+  console.log('events for tableofNames', data)
+
+  function f(events) {
+    if (events === undefined || events === null) {
+      throw new Error();
+    }
+    const result = {};
+    for (const item of events) {
+      if (!(item.id in result)) {
+        result[item.id] = {
+          'event_id': item.id,
+          'event_name': item.event_name,
+          'guest_names': [],
+        }
+      }
+      const obj = result[item.id];
+      obj['guest_names'].push(item.guest_name);
+    }
+    console.log('result', result)
+    setResult(result);
   }
-
-}, [events])
-
-
-console.log('events for tableofNames', data)
-
-function f(events) {
- if (events === undefined || events === null) {
-   throw new Error();
- }
- const result = {};
- for (const item of events) {
-     if (!(item.id in result)) {
-         result[item.id] = {
-           'event_id': item.id,
-             'event_name': item.event_name,
-             'guest_names': [],
-         }
-     }
-     const obj = result[item.id];
-     obj['guest_names'].push(item.guest_name);
- }
- console.log('result', result)
- setResult(result);
-}
-//result = []
+  //result = []
 
 
 
@@ -83,18 +83,18 @@ function f(events) {
   return (
     <div >
       <div>
-      <h1>All Your Events</h1>
-      {data && 
-      <Popup trigger={<button>Create Event Table</button>} position="right center">
+        <h1>All Your Events</h1>
+        {data &&
+          <Popup trigger={<button>Create Event Table</button>} position="right center">
             <div>Customize Your Rooms</div>
-            <EnterNames org_id={data}/>
+            <EnterNames org_id={data} />
           </Popup>
-      }
+        }
       </div>
       <br></br><br></br>
       {/* table of names load guests names instead of guest guest_ids */}
       {result && <EventsGuestsList result={result} />}
-      
+
 
     </div>
   );
