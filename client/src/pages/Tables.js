@@ -85,7 +85,7 @@ export default function Tables({ org_id, eventName, guests }) {
       <div>
         <h1>All Your Events</h1>
         {data &&
-          <Popup trigger={<button>Create Event Table</button>} position="right center">
+          <Popup trigger={<button className="creatTableButton">Create Event Table</button>} position="right center">
             <div>Customize Your Rooms</div>
             <EnterNames org_id={data} />
           </Popup>

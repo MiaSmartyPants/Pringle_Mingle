@@ -54,7 +54,7 @@ export const EventsGuestsList = ({ result }) => {
                 ))}
               </tbody>
             </table>
-            <Popup trigger={<button onClick={updateEventId}>Create Groups</button>} position="right center">
+            <Popup trigger={<button onClick={updateEventId} className="button">Create Groups</button>} position="right center">
               <div>Customize Your Rooms</div>
               <CustomizeForm eventId={event_id} />
             </Popup>
