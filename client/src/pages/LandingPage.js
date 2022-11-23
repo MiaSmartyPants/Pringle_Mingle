@@ -5,7 +5,7 @@ import { RetrieveOrg } from "../components/RetrieveOrg";
 import { Profile } from "../components/Profile";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect } from "react";
-
+import LandingPic from '../data/LandingPic.png'
 
 
 import { Link } from 'react-router-dom';
@@ -161,8 +161,7 @@ export default function LandingPage() {
               No stress wth Pringle Mingle
             </div>
             <div className="section-text__body">
-              Dorem ipsum dolor sitamet, consectetur adipiscing elit, sed do eiusm
-              tempor incididunt ulabore et dolore magna aliqua.
+              Let us handle the work! We'll have people meeting eveyone they can for your event.
             </div>
             {!isAuthenticated && (
 
@@ -182,7 +181,7 @@ export default function LandingPage() {
           </div>
 
           <div className="section-image">
-            <img src="" alt="app preview" />
+            <img src={LandingPic} alt="people mingling" />
           </div>
         </div>
       </section>
