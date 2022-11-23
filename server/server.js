@@ -26,20 +26,19 @@ app.get('/test', (req, res) => {
 })
 
 
-const sortation = (request, response) => {
+const sortation =   (request) => {
   const sizeOfGroups = (request.body.sizeOfGroups)
   const numOfRounds = (request.body.numOfRounds)
   const event_id = 1;
   //function to get all guests_ids by event id
-  db.getGuestsByEventId({event_id})//variable and this will be the return info
-  console.log(sizeOfGroups, numOfRounds)
-  response.status(201).json({ 'sizeOfGroups': sizeOfGroups, 'numOfRounds': numOfRounds })
+  const GuestByEventId =  db.getGuestsByEventId({event_id})//variable and this will be the return info
+  console.log(sizeOfGroups, numOfRounds, GuestByEventId)
+  testing({GuestByEventId});
 }
 
-const getGuestsByEventId = (event_id, sizeOfGroups, numOfRounds) => {
-
-  console.log(event_id,sizeOfGroups,numOfRounds)
-  }
+function testing({GuestByEventId}){
+  console.log('testing', GuestByEventId)
+}
 
 app.get('/admin', db.getAdmin)
 
@@ -49,6 +48,7 @@ app.get('/adminemail/:email', db.getAdminByEmail)
 app.get('/guests', db.getGuests)
 app.get('/guests/:id', db.getGuestById)
 app.get('/events/:orgid', db.getEventsByOrgId)
+app.get('/eventlist/:orgid', db.getEventList)
 app.get('/rooms/:id', db.getRoomsByEventId)
 app.get('/organizations', db.getAllOrgs)
 app.get('/organizations/:orgname', db.getOrgByName)
@@ -59,7 +59,7 @@ app.post('/admin', db.postAdmin)
 app.post('/organizations/', db.postOrg)
 app.post('/event', db.postEvent)
 app.post('/guests/', db.postGuests)
-app.post('/sortation/', sortation)
+app.post('/sortation', db.sortation)
 
 app.put('/adminupdate/:email', db.updateAdminByEmail)
 //app.delete('/event/', db.deleteEvent)

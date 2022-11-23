@@ -4,7 +4,7 @@ import 'reactjs-popup/dist/index.css';
 import Papa from 'papaparse';
 
 
-export const EnterNames = ({parentToChild}) => {
+export const EnterNames = ({org_id}) => {
 
     const [file, setFile] = useState();
     const [guests, setGuests] = useState('');
@@ -44,11 +44,11 @@ export const EnterNames = ({parentToChild}) => {
 
     //add all names to database and event
 function createEvent() {
-    console.log(parentToChild)
+    console.log(org_id)
     const eventsAndGuests = {
         'eventName': eventName,
         'guests' : guests,
-        'org_id' : parentToChild
+        'org_id' : org_id
     }
     fetch('http://localhost:5050/event', {
       method: 'POST',

@@ -10,7 +10,7 @@ const initialState = {
     email: '',
     message: '',
 }
-export const ContactForm = ({data}) => {
+export const ContactForm = ({orgId}) => {
     const form = useRef();
     const [name, setName] = useState();
     const [email, setEmail] = useState();
@@ -27,14 +27,14 @@ export const ContactForm = ({data}) => {
         e.preventDefault();
         console.log(name)
         console.log(email)
-        console.log(data)
+        console.log(orgId)
      
             fetch('http://localhost:5050/adminorgid/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, name, data}),
+                body: JSON.stringify({ email, name, orgId}),
             })
                 .then(response => {
                     return response.text();
@@ -43,23 +43,23 @@ export const ContactForm = ({data}) => {
                     console.log(data)
                 })
         
-        // emailjs
-        //     .sendForm(
-        //         "service_t89ekql",
-        //         "template_i0s4ldb",
-        //         form.current,
-        //         "4bZhmL4s715tTifG_"
-        //     )
-        //     .then(
-        //         (result) => {
-        //             console.log(result.text);
-        //             alert("SUCCESS!");
-        //         },
-        //         (error) => {
-        //             console.log(error.text);
-        //             alert("FAILED...", error);
-        //         }
-        //     );
+        emailjs
+            .sendForm(
+                "service_t89ekql",
+                "template_i0s4ldb",
+                form.current,
+                "4bZhmL4s715tTifG_"
+            )
+            .then(
+                (result) => {
+                    console.log(result.text);
+                    alert("SUCCESS!");
+                },
+                (error) => {
+                    console.log(error.text);
+                    alert("FAILED...", error);
+                }
+            );
     }
 
     return (

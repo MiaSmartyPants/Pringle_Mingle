@@ -19,6 +19,7 @@ export default function Tables({ org_id, eventName, guests }) {
     // CALL here
     if (org_id) {
       getData()
+      setData(org_id)
     }
 
     console.log('Tables', org_id)
@@ -61,6 +62,7 @@ function f(events) {
  for (const item of events) {
      if (!(item.id in result)) {
          result[item.id] = {
+           'event_id': item.id,
              'event_name': item.event_name,
              'guest_names': [],
          }
@@ -68,13 +70,12 @@ function f(events) {
      const obj = result[item.id];
      obj['guest_names'].push(item.guest_name);
  }
- console.log(result)
+ console.log('result', result)
  setResult(result);
 }
+//result = []
 
-const parentToChild = () => {
-  setData(org_id)
-}
+
 
 
 
@@ -83,10 +84,10 @@ const parentToChild = () => {
     <div >
       <div>
       <h1>All Your Events</h1>
-      {org_id && 
+      {data && 
       <Popup trigger={<button>Create Event Table</button>} position="right center">
             <div>Customize Your Rooms</div>
-            <EnterNames parentToChild={data}/>
+            <EnterNames org_id={data}/>
           </Popup>
       }
       </div>
@@ -94,9 +95,6 @@ const parentToChild = () => {
       {/* table of names load guests names instead of guest guest_ids */}
       {result && <EventsGuestsList result={result} />}
       
-     
-
-      {/* <button onClick={createRooms}>create breakout rooms</button> */}
 
     </div>
   );
