@@ -46,14 +46,14 @@ export const GroupsOfNames = ({ allRooms }) => {
 
   }, [])
   return (
-    <div>
+    <div >
       {!!roundsOfNames &&
         <form>
           {Object.values(roundsOfNames).map(({ round, break_out_room_guests }) => (
-            <div>
+            <div className='copyboxes-wrap'>
               <h4>Round {round}</h4>
 
-              <textarea defaultValue={break_out_room_guests.join('\r\n\r\n')} rows="15" cols="40" />
+              <textarea className='copyboxes' defaultValue={break_out_room_guests.join('\r\n\r\n')} rows="15" cols="40" />
 
 
             </div>

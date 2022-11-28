@@ -66,12 +66,13 @@ function createEvent() {
   }
     return (
         <div>
-            <div>EnterNames</div>
+            <div className='popup'>
+                <h3>Enter Names</h3></div>
 
             <form onSubmit={handleOnSubmit}>
 
-                <div>
-                    <label>Names</label>
+                <div style={{color: "black"}}>
+                    <label>Paste Names or Upload</label>
                     <textarea
                         name="Paste List of Names"
                         placeholder="One name per line please"
@@ -79,19 +80,19 @@ function createEvent() {
                     />
                 </div>
                 <br></br>
-                <div>
+                <div style={{color: "black"}}>
                     <label>Event Name</label>
                     <input
                         type="text"
-                        placeholder="What should this table be called?"
+                        placeholder="Ex: H2 2022 Mock Inteview"
                         onChange={updateEventName}
                         required
                     />
                 </div>
 
                 <br></br>
-                <div>
-                    <label>Upload Names</label>
+                <div style={{color: "black"}}>
+                    <label>Upload CSV</label>
                     <div style={{ textAlign: "center" }}>
                         <input type={"file"} accept={".csv"} onChange={OnChange} />
 

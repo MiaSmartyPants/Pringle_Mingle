@@ -17,7 +17,6 @@ class SelectingEvents extends Component {
     console.log(e.target.value)
 const eventId = (e.target.value)
 
-//when event is selected, call function to pass it's event id+1 to groups page,
   this.state.getAllRooms(eventId)
   }
 
@@ -25,13 +24,16 @@ const eventId = (e.target.value)
     const eventData = this.state.eventData;
     //console.log('selectingEvent', eventData)
     return (
-      <select onChange={this.handleChange}>
+      <div className='select'>
+      <select  onChange={this.handleChange}>
+        <option className='options'>Select an event to display groups </option>
          {eventData.map(({event_name, id}, index) => {
            return (
-             <option value={id}> {event_name} </option>
+             <option  value={id}> {event_name} </option>
            )
          })}
     </select>
+    </div>
     )
   }
 }
