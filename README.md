@@ -82,7 +82,12 @@ Create an account with your own organization email for full experience
 
 ## Screenshots
 Database Model
+<<<<<<< HEAD
 ![App Screenshot](https://www.dropbox.com/s/k4ic8oto73yaeor/Screen%20Shot%202022-11-23%20at%207.54.24%20AM.png?dl=0)
+=======
+
+<img src="databaseSchema.png" width='300' />
+>>>>>>> 8429fe27245aea35bbaa62ee1e92563904467ba0
 
 
 ## Installation
@@ -128,6 +133,7 @@ Database Model
 
 
 ## Testing
+<<<<<<< HEAD
 
 To run tests on the terminal:
 * On client side run the following command:
@@ -140,6 +146,19 @@ To run tests on the terminal:
 - Redirect user to dashboard after welcome in button is pressed
 - CSS for tables and color scheme
 - Redesign layout for displaying groups 
+=======
 
+To run tests on the terminal:
+* On client side run the following command:
+    ```
+    npm test
+    ```
+
+>>>>>>> 8429fe27245aea35bbaa62ee1e92563904467ba0
+
+## Future Development
+- Redirect user to dashboard after welcome in button is pressed
+- CSS for tables and color scheme
+- Redesign layout for displaying groups 
 
 

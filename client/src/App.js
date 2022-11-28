@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import JsonData from "./data/data.json";
 import Navbar from "./components/Navbar";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import { useEffect, useState } from "react";
 import {useAuth0} from "@auth0/auth0-react";
 import Fetch  from "./components/Fetch";
@@ -17,9 +17,7 @@ import Tables from "./pages/Tables";
 export default function App({data}) {
   const {user,isAuthenticated}= useAuth0();
   const [org_id,setOrg_id]= useState();
- 
-  
-  console.log(user)
+
 
   const [landingPageData, setLandingPageData] = useState({});
   const [email, setEmail] = useState();
@@ -39,11 +37,17 @@ setOrg_id(data[0].org_id)
 
 
 
+   
+
+
+
   return (
     <div className="App">
       {!!user && <Fetch user={user} recieveAdminData={recieveAdminData} />}
+      
       <Router>
-        <Navbar />
+      {!!org_id && <Navbar org_id={org_id}/>  }
+        
         <Routes>
         <Route path='/dashboard' element={<Dashboard org_id={org_id}/>}  />
         <Route path='/groups' element={<Groups org_id={org_id} />} />

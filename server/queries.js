@@ -258,7 +258,7 @@ catch(error){
 
 //insert into room  values groups, evnt id, round (num of rounds=i), 
 const postGroups = (round,group, id ) => {
-  console.log('post groups', round,group, id )
+  //console.log('post groups', round,group, id )
   try{
   pool.query('INSERT INTO rooms (guest_names, event_id, round) VALUES ($1, $2, $3) RETURNING *', [group, id, round]) 
   }
@@ -492,12 +492,12 @@ for (let i = 0; i < numOfRounds; i++) {
    postGroups(i+1,groups[j], id )
   }
  
-  // console.log('===');
-  // console.log(groups);
-  // console.log('===');
+  console.log('===');
+  console.log(groups);
+  console.log('===');
 }
 
-// console.log(metWith);
+console.log(metWith);
 
 }
 

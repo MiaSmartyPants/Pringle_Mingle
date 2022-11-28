@@ -19,15 +19,25 @@ import LogoutButton from "./LogoutButton";
 import LoginButton from "./LoginButton";
 import { Profile } from "./Profile";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
 
-export default function Navbar() {
+export default function Navbar({org_id}) {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
   const { user, isAuthenticated } = useAuth0();
+  const [orgId, setOrgId] = useState(org_id)
+  useEffect(() => {
+       setOrgId(org_id)
+  
+      
+    },[org_id]);
 
+  //console.log(orgId, 'navbar')
   return (
 
     !!isAuthenticated && (
+      
+      
       <IconContext.Provider value={{ color: "#FFF" }}>
         {/* All the icons now are white */}
 
@@ -46,16 +56,20 @@ export default function Navbar() {
                 </Link>
               </li>
               <Profile />
-
+              
               {SidebarData.map((item, index) => {
+                
                 return (
+                 
                   <li key={index} className={item.cName}>
                     <Link to={item.path}>
                       {item.icon}
                       <span>{item.title}</span>
                     </Link>
                   </li>
+                  
                 );
+                
               })}
               <li>
                 <LogoutButton />
@@ -69,6 +83,8 @@ export default function Navbar() {
 
       </IconContext.Provider>
 
+    
     )
+    
   );
 }

@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 
 export default function LandingPage() {
   const { user, isAuthenticated } = useAuth0();
+  const [isFirstLoad, setIsFirstLoad] = useState(true)
 
   const [name, setName] = useState();
   const [email, setEmail] = useState();
@@ -28,6 +29,13 @@ export default function LandingPage() {
 
   }, [isAuthenticated])
 
+  useEffect(() => {
+    if (!isFirstLoad) {
+        window.location.reload();
+    } else {
+        setIsFirstLoad(false)
+    }
+}, [org_id]);
 
   function orgValidation() {
     const orgName = prompt('Please enter organization name')
