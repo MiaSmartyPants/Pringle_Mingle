@@ -802,3 +802,14 @@ span {
    font-size:x-large;
 }
 
+.paragraph{
+  margin: 10px;
+  padding: 30px;
+  border-radius: 3px;
+  border-color: #002bff;
+  justify-content: center;
+  text-align: center;
+  max-width: 500px;
+  margin-left: flex;
+ 
+}

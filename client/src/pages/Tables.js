@@ -84,6 +84,10 @@ export default function Tables({ org_id, eventName, guests }) {
     <div >
       <div>
         <h1>All Your Events</h1>
+        <div className="paragraph">
+           <h3>Start by creating an event table. This will be all the names you will later sort into groups. After clicking submit, refresh the page and select your options for create groups. Your results will be waitng for you on the groups page!</h3>
+        </div>
+       
         {data &&
           <Popup trigger={<button className="creatTableButton">Create Event Table</button>} position="right center">
             <div>Customize Your Rooms</div>

@@ -12,7 +12,7 @@ https://server-6cav.onrender.com/
 Log into Gmail with this test user.
 | Email             | Password                                                              |
 | ----------------- | ------------------------------------------------------------------ |
-| highnote143@gmail.com | PringleMingleRocks!1 |
+| mia2167dix@gmail.com| PringleMingleRocks!1 |
 
 OR 
 
@@ -27,6 +27,8 @@ Create an account with your own organization email for full experience
 - Send an invite to people who do not have an organization email so they can collaborate
 - Upload csv files of names
 - User Login with Auth0
+- Sorting algorithm allows everyone to meet everyone with the least duplication
+
 
 
 

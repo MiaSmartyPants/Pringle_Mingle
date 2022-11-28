@@ -19,7 +19,7 @@ export default function Dashboard({ org_id }) {
   //use effect based on org id, call set orgid
   return (
     <div >
-      <h1>The Dashboard</h1>
+      <h3>Send an invite to those who do not have an organization email! </h3>
       <div className="child graph">
         <img src="https://media.giphy.com/media/fX1WbBccfGlffLwCjZ/giphy.gif" />
 

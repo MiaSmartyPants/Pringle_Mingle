@@ -69,7 +69,11 @@ export default function Groups({ org_id, eventId }) {
 
   return (
     <div >
-      <h3>Select an Event for Rooms</h3>
+      <div  className="paragraph">
+       <h3>Display the groups by selecting the event. If no groups are displayed, head the the tables page and follow the direction at the top!</h3>
+      <h4> Each line is a new group!</h4>       
+      </div>
+
       {/* selecting events needs a callback function so that so i can get a fetch request all rooms with event id */}
       {!!eventData &&
         <SelectingEvents eventData={eventData} getAllRooms={getAllRooms} />
