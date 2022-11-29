@@ -32,7 +32,7 @@ Log into Gmail with this test user.
 - Send an invite to people who do not have an organization email so they can collaborate
 - Upload csv files of names
 - User Login with Auth0
-- Sorting algorithm allows everyone to meet everyone with the least duplication
+- Sorting algorithm with adjacency matrix allows everyone to meet everyone with the least duplication
 
 
 
@@ -147,20 +147,7 @@ To run tests on the terminal:
 
 
 ## Future Development
-- Redirect user to dashboard after welcome in button is pressed
-- CSS for tables and color scheme
-- Redesign layout for displaying groups 
-=======
-
-To run tests on the terminal:
-* On client side run the following command:
-    ```
-    npm test
-    ```
-
-## Future Development
-- Redirect user to dashboard after welcome in button is pressed
-- CSS for tables and color scheme
+- Develop option for different roles in groups
 - Redesign layout for displaying groups 
 
 
