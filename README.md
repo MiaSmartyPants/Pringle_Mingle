@@ -9,14 +9,19 @@ Pringle Mingle is a web application designed to help people meet as many people 
 
 https://server-6cav.onrender.com/
 
+
+<strong>Create an account with your own organization email for full experience</strong>
+
+OR 
+
 Log into Gmail with this test user.
 | Email             | Password                                                              |
 | ----------------- | ------------------------------------------------------------------ |
 | mia2167dix@gmail.com| PringleMingleRocks!1 |
 
-OR 
 
-Create an account with your own organization email for full experience
+
+
 
 
 
@@ -84,12 +89,10 @@ Create an account with your own organization email for full experience
 
 ## Screenshots
 Database Model
-<<<<<<< HEAD
-![App Screenshot](https://www.dropbox.com/s/k4ic8oto73yaeor/Screen%20Shot%202022-11-23%20at%207.54.24%20AM.png?dl=0)
 =======
 
 <img src="databaseSchema.png" width='300' />
->>>>>>> 8429fe27245aea35bbaa62ee1e92563904467ba0
+
 
 
 ## Installation
@@ -135,7 +138,6 @@ Database Model
 
 
 ## Testing
-<<<<<<< HEAD
 
 To run tests on the terminal:
 * On client side run the following command:
@@ -155,8 +157,6 @@ To run tests on the terminal:
     ```
     npm test
     ```
-
->>>>>>> 8429fe27245aea35bbaa62ee1e92563904467ba0
 
 ## Future Development
 - Redirect user to dashboard after welcome in button is pressed
