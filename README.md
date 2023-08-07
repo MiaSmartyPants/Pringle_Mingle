@@ -5,27 +5,6 @@ Pringle Mingle is a web application designed to help people meet as many people 
 
 
 
-## Demo
-
-https://server-6cav.onrender.com/
-
-
-<strong>Create an account with your own organization email for full experience</strong>
-
-OR 
-
-Log into Gmail with this test user.
-| Email             | Password                                                              |
-| ----------------- | ------------------------------------------------------------------ |
-| mia2167dix@gmail.com| PringleMingleRocks!1 |
-
-
-
-
-
-
-
-
 ## Features
 
 - Organization email verification, allows for anyone with the organization email to access the same data and collaborate
